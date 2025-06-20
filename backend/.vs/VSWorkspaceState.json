@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Adventure.Api",
+    "\\Adventure.Api\\Controller",
+    "\\Adventure.Api\\Data",
+    "\\Adventure.Api\\Properties"
+  ],
+  "SelectedNode": "\\Adventure.Api\\Controller\\TestController.cs",
+  "PreviewInSolutionExplorer": false
+}

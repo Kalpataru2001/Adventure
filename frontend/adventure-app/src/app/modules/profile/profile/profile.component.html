@@ -1,0 +1,102 @@
+<div *ngIf="isLoading" class="flex items-center justify-center min-h-screen text-gray-700 text-xl">
+  Loading Profile...
+</div>
+
+<div *ngIf="!isLoading && profileData" class="w-full bg-gray-50 min-h-screen">
+
+  <!-- ==================== START: POLISHED PROFILE HEADER ==================== -->
+  <div class="bg-gradient-to-br from-purple-600 via-indigo-600 to-blue-600 text-white p-6 shadow-lg">
+    <div class="flex flex-col items-center">
+
+      <!-- AVATAR BUTTON -->
+      <button (click)="onAvatarClick(fileInput)" class="avatar-button" title="Change Avatar" [disabled]="isUploading">
+        <!-- Spinner shows during upload -->
+        <div *ngIf="isUploading" class="spinner"></div>
+        <!-- Actual avatar image -->
+        <img *ngIf="!isUploading && profileData.avatarUrl" [src]="profileData.avatarUrl" alt="User Avatar"
+          class="avatar-image">
+        <!-- Default icon if no avatar and not uploading -->
+        <span *ngIf="!isUploading && !profileData.avatarUrl" class="text-5xl">👤</span>
+        <!-- Small edit icon that appears on hover -->
+        <div *ngIf="!isUploading" class="edit-overlay">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+            stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.536L16.732 3.732z" />
+          </svg>
+        </div>
+      </button>
+      <input type="file" #fileInput (change)="onFileSelected($event)" accept="image/png, image/jpeg" class="hidden">
+
+      <!-- NAME AND EDIT BUTTON -->
+      <div class="flex items-center gap-2 mt-4">
+        <h1 class="text-3xl font-bold tracking-tight">{{ profileData.firstName }} {{ profileData.lastName }}</h1>
+        <button (click)="onEditName()" title="Edit Name" class="p-2 rounded-full hover:bg-white/20 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+            stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.536L16.732 3.732z" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- USER DETAILS -->
+      <div class="mt-2 text-sm text-white/80 flex items-center gap-4">
+        <span>Level {{ profileData.level }} Adventurer</span>
+        <span>•</span>
+        <span>Member since {{ profileData.memberSince | date: 'MMMM yyyy' }}</span>
+      </div>
+    </div>
+  </div>
+  <!-- ===================== END: POLISHED PROFILE HEADER ===================== -->
+
+  <!-- MAIN CONTENT AREA (The white cards) -->
+  <div class="p-4 md:p-6 max-w-4xl mx-auto w-full">
+    <!-- Badges Card (Structure is the same) -->
+    <div class="card mb-4">
+      <h4 class="text-lg font-semibold mb-3">Recent Badges</h4>
+      <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4">
+        <div *ngFor="let badge of profileData.badges" class="text-center">
+          <div class="text-4xl mb-1">{{ badge.iconUrl }}</div>
+          <div class="text-xs text-gray-600">{{ badge.name }}</div>
+        </div>
+        <p *ngIf="profileData.badges.length === 0" class="col-span-full text-center text-gray-500 text-sm py-4">No
+          badges earned yet!</p>
+      </div>
+    </div>
+
+    <!-- Stats Card (Structure is the same) -->
+    <div class="card mb-4">
+      <h4 class="text-lg font-semibold mb-3">Adventure Stats</h4>
+      <div class="stat-item">
+        <span>Total Adventures</span>
+        <span class="text-green-500 font-semibold">{{ profileData.stats.totalAdventures }}</span>
+      </div>
+      <div class="stat-item">
+        <span>Current Streak</span>
+        <span class="text-red-500 font-semibold">{{ profileData.stats.currentStreak }} days</span>
+      </div>
+      <div class="stat-item">
+        <span>Friends</span>
+        <span class="text-yellow-500 font-semibold">{{ profileData.stats.friendsCount }}</span>
+      </div>
+    </div>
+
+    <!-- About Card (Structure is the same) -->
+    <div class="card mb-4">
+      <h4 class="text-lg font-semibold mb-3">About</h4>
+      <p class="text-sm text-gray-600">
+        This app helps you turn everyday life into a series of bite-size adventures,
+        gamifying local exploration and encouraging you to discover your city in fresh, social ways.
+      </p>
+    </div>
+
+    <!-- Sign Out Button (Structure is the same) -->
+    <div class="mt-6">
+      <button (click)="onSignOut()"
+        class="w-full py-3 rounded-lg bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold transition">
+        Sign Out
+      </button>
+    </div>
+  </div>
+</div>

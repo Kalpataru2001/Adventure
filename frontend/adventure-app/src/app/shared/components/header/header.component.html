@@ -1,0 +1,70 @@
+<nav class="bg-white shadow-md">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16 items-center">
+      <!-- Logo (Untouched) -->
+      <a routerLink="/" class="text-xl font-bold text-blue-600 hover:text-blue-800">
+        Adventure App
+      </a>
+
+      <!-- Hamburger (mobile) (Untouched) -->
+      <button
+        class="lg:hidden p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+        (click)="toggleMenu()"
+        aria-label="Toggle menu"
+      >
+        <svg *ngIf="!open" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg *ngIf="open" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+      <!-- Menu links -->
+      <div
+        [ngClass]="{ 'block': open, 'hidden': !open }"
+        class="w-full lg:w-auto lg:flex lg:items-center lg:space-x-6"
+      >
+        <!-- These links are untouched -->
+        <a routerLink="/" class="block px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600">Home</a>
+        <a routerLink="/social" class="block px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600">Social Media</a>
+        <a routerLink="/destinations" class="block px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600">Destinations</a>
+        <a routerLink="/bookings" class="block px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600">Bookings</a>
+
+        <!-- ==================== START: DYNAMIC SECTION ==================== -->
+
+        <!-- This container checks if a user is logged in -->
+        <ng-container *ngIf="authService.currentUser$ | async as user; else showLogin">
+          
+          <!-- If LOGGED IN, show Profile link and Logout Icon -->
+          <a routerLink="/profile" class="block px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600">Profile</a>
+
+          <button (click)="onLogout()" title="Logout" class="block p-2 rounded-full text-red-600 hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+            </svg>
+          </button>
+
+        </ng-container>
+
+        <!-- This template is shown if the user is LOGGED OUT -->
+        <ng-template #showLogin>
+          <!-- Show the original Login link -->
+          <a routerLink="/auth/login" class="block px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600">Login</a>
+          <!-- The profile link is hidden when logged out -->
+          <a routerLink="/profile" class="hidden">Profile</a> <!-- Or remove this line entirely -->
+        </ng-template>
+
+        <!-- ===================== END: DYNAMIC SECTION ===================== -->
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Optional backdrop (Untouched) -->
+  <div
+    *ngIf="open"
+    (click)="closeMenu()"
+    class="fixed inset-0 bg-black opacity-25 lg:hidden"
+  ></div>
+</nav>

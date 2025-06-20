@@ -1,0 +1,23 @@
+/* 
+  Defines the style for the Like, Comment, and Share buttons.
+  It creates a large, easy-to-click area with a subtle hover effect.
+*/
+.action-button {
+    @apply flex-1 flex items-center justify-center gap-2 p-3 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer;
+
+    // This is a specific class for the "Like" button when it's active
+    &.active-like {
+        @apply text-red-500;
+    }
+}
+
+// Add this to your social.component.scss
+.menu-item {
+    @apply flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100;
+ }
+
+// This utility class from Tailwind preserves line breaks and spaces in text.
+// We add it here to make sure it's available.
+.whitespace-pre-wrap {
+    white-space: pre-wrap;
+ }

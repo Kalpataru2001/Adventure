@@ -1,0 +1,146 @@
+.home-screen {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  padding-bottom: 80px;
+
+  .status-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: rgba(0,0,0,0.1);
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: white;
+    margin: 15px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+
+    .app-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #2c3e50;
+    }
+
+    .nav-icon {
+      width: 30px;
+      height: 30px;
+      background: #4ECDC4;
+      border-radius: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-weight: bold;
+    }
+  }
+
+  .content-area {
+    padding: 0 15px;
+
+    .card {
+      background: white;
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease;
+
+      &:hover {
+        transform: scale(1.02);
+      }
+
+      &.adventure-card {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .adventure-text {
+          flex: 1;
+          font-size: 1rem;
+          color: #2c3e50;
+          font-weight: 500;
+        }
+
+        .btn {
+          padding: 10px 20px;
+          border-radius: 25px;
+          border: none;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          background: linear-gradient(135deg, #4ECDC4, #44A08D);
+          color: white;
+
+          &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(78, 205, 196, 0.3);
+          }
+        }
+      }
+
+      &.stats-card {
+        .streak {
+          color: #FF6B6B;
+          font-weight: bold;
+        }
+
+        .stats-grid {
+          display: flex;
+          justify-content: space-around;
+          text-align: center;
+
+          .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #4ECDC4;
+          }
+
+          .stat-label {
+            font-size: 0.8rem;
+            color: #666;
+          }
+        }
+      }
+    }
+  }
+
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    display: flex;
+    justify-content: space-around;
+    padding: 15px;
+    border-top: 1px solid #eee;
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 0.8rem;
+      color: #666;
+      cursor: pointer;
+
+      &.active {
+        color: #4ECDC4;
+      }
+
+      &::before {
+        content: "●";
+        font-size: 1.2rem;
+        margin-bottom: 5px;
+      }
+    }
+  }
+}

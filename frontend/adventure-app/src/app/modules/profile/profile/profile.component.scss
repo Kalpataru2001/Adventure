@@ -1,0 +1,77 @@
+/* A reusable class for the white content cards */
+.card {
+  @apply bg-white rounded-xl shadow-sm p-4 md:p-6;
+}
+
+/* Styles for each item in the "Adventure Stats" card */
+.stat-item {
+  @apply flex justify-between items-center py-3 border-b border-gray-100 last:border-b-0;
+
+  span:first-child {
+    @apply text-gray-600;
+  }
+}
+
+/* 
+  NEW, POLISHED STYLES FOR THE AVATAR BUTTON 
+*/
+.avatar-button {
+  @apply relative inline-block cursor-pointer rounded-full h-28 w-28 p-1 bg-white/20;
+  @apply border-2 border-white/50 shadow-lg;
+  @apply flex items-center justify-center; // Centers the spinner or default icon
+  transition: transform 0.2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.05); // Subtle zoom effect on hover
+  }
+
+  .avatar-image {
+    @apply w-full h-full object-cover rounded-full; // Ensures image is circular and covers the area
+  }
+
+  .edit-overlay {
+    @apply absolute -bottom-1 -right-1 bg-white text-gray-700 rounded-full h-8 w-8;
+    @apply flex items-center justify-center shadow-md; // Makes the pencil icon pop
+    opacity: 0;
+    transition: opacity 0.2s, transform 0.2s;
+    transform: scale(0.8);
+
+    // The small pencil icon only appears when you hover over the main avatar button
+    svg {
+      @apply h-4 w-4;
+    }
+  }
+
+  &:hover .edit-overlay {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .spinner {
+    @apply border-4 border-white/30 rounded-full w-12 h-12;
+    border-top-color: white; // Makes one part of the spinner solid for a "loading" look
+    animation: spin 1s linear infinite;
+  }
+}
+
+/* Spinner animation definition */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* We no longer need the old, unused badge classes */
+/* 
+.badges-container, 
+.badges-grid, 
+.badge-item, 
+.badge-icon, 
+.badge-name {
+  // These are now handled by Tailwind CSS directly in the HTML
+}
+*/
