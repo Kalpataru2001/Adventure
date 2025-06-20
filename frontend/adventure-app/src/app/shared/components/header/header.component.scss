@@ -1,0 +1,41 @@
+/* Style for desktop text-based navigation links */
+.nav-link {
+  @apply px-3 py-2 rounded-md text-sm font-medium text-gray-700;
+  @apply hover:text-blue-600;
+}
+
+/* Style for mobile text-based navigation links */
+.mobile-nav-link {
+  @apply block px-3 py-2 rounded-md text-base font-medium text-gray-700;
+  @apply hover:bg-gray-100 hover:text-gray-900;
+}
+
+/* Style for the main login button */
+.login-button {
+  @apply px-4 py-2 rounded-md text-sm font-semibold text-white bg-blue-600;
+  @apply hover:bg-blue-700 transition-colors;
+}
+
+/* Style for the desktop icon buttons */
+.icon-button {
+  @apply p-2 rounded-full text-gray-500 hover:bg-gray-100 hover:text-gray-900;
+  @apply transition-colors;
+}
+
+/* The style for the red notification dot */
+.notification-badge {
+  @apply absolute -top-1 -right-1 h-5 w-5 bg-red-500 text-white text-xs font-bold;
+  @apply flex items-center justify-center rounded-full border-2 border-white;
+}
+
+// Add these new styles to your header.component.scss
+
+.notification-item {
+  @apply flex items-start gap-3 p-4 border-b border-gray-100 last:border-b-0;
+  @apply hover:bg-gray-50 transition-colors;
+
+  // A style for unread notifications
+  &.unread {
+    @apply bg-blue-50;
+  }
+}

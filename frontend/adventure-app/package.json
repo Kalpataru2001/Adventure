@@ -21,6 +21,7 @@
     "@angular/platform-browser": "^15.2.0",
     "@angular/platform-browser-dynamic": "^15.2.0",
     "@angular/router": "^15.2.0",
+    "@microsoft/signalr": "^8.0.7",
     "@supabase/supabase-js": "^2.50.0",
     "bootstrap": "^5.3.6",
     "firebase": "^9.0.0",

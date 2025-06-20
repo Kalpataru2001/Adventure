@@ -37,7 +37,10 @@ export function appInitializer(authService: AuthService) {
     AppRoutingModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
-      preventDuplicates: true
+      preventDuplicates: true,
+       timeOut: 10000,       // 10 seconds
+      closeButton: true,    // Display a close button
+      progressBar: true,     // Show a progress bar
     }),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth())

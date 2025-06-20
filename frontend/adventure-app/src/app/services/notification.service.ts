@@ -1,12 +1,23 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
+
+export interface Notification {
+  id: string;
+  message: string;
+  isRead: boolean;
+  createdAt: string;
+  actorAvatarUrl: string | null;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotificationService {
+  private readonly apiUrl = 'https://localhost:44384/api/Notifications';
 
-  constructor(private toastr: ToastrService) {}
+  constructor(private toastr: ToastrService, private http: HttpClient) { }
 
   success(message: string, title: string = 'Success') {
     this.toastr.success(message, title);
@@ -22,5 +33,12 @@ export class NotificationService {
 
   warning(message: string, title: string = 'Warning') {
     this.toastr.warning(message, title);
+  }
+  getMyNotifications(): Observable<Notification[]> {
+    return this.http.get<Notification[]>(this.apiUrl);
+  }
+
+  markAllAsRead(): Observable<any> {
+    return this.http.post(`${this.apiUrl}/mark-as-read`, {});
   }
 }

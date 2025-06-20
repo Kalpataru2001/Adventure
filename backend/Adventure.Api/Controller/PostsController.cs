@@ -6,6 +6,8 @@ using Adventure.Api.Models;
 using Adventure.Api.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using Adventure.Api.Hubs;
+using Microsoft.AspNetCore.SignalR;
 
 namespace Adventure.Api.Controller
 {
@@ -16,11 +18,13 @@ namespace Adventure.Api.Controller
     {
         private readonly AppDbContext _context;
         private readonly IFileService _fileService; // We'll need this for uploads
+        private readonly IHubContext<NotificationHub> _notificationHubContext;
 
-        public PostsController(AppDbContext context, IFileService fileService)
+        public PostsController(AppDbContext context, IFileService fileService, IHubContext<NotificationHub> notificationHubContext)
         {
             _context = context;
             _fileService = fileService;
+            _notificationHubContext = notificationHubContext;
         }
 
         // A DTO for how we want to return posts to the frontend
@@ -102,6 +106,17 @@ namespace Adventure.Api.Controller
                 {
                     newPost.VideoUrl = publicUrl;
                 }
+            }
+            var currentUser = await _context.Users.FindAsync(userId);
+            var friendIds = await _context.Friends
+                .Where(f => f.RequesterId == userId && f.Status == "accepted")
+                .Select(f => f.AddresseeId.ToString())
+                .ToListAsync();
+
+            if (friendIds.Any())
+            {
+                await _notificationHubContext.Clients.Users(friendIds)
+                    .SendAsync("ReceiveNotification", $"{currentUser.FirstName} shared a new post.");
             }
 
             _context.Posts.Add(newPost);

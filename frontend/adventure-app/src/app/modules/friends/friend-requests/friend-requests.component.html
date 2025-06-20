@@ -1,0 +1,18 @@
+<div class="max-w-2xl mx-auto p-6">
+  <h1 class="text-3xl font-bold mb-6">Friend Requests</h1>
+  <div *ngIf="isLoading">Loading...</div>
+  <div *ngIf="!isLoading && requests.length === 0" class="text-center text-gray-500">No new friend requests.</div>
+  
+  <div class="space-y-4">
+    <div *ngFor="let req of requests" class="bg-white p-4 rounded-lg shadow-sm flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <img [src]="req.avatarUrl || 'assets/default-avatar.png'" class="h-12 w-12 rounded-full">
+        <span class="font-semibold">{{ req.firstName }} {{ req.lastName }}</span>
+      </div>
+      <div class="flex gap-2">
+        <button (click)="accept(req.requesterId)" class="px-4 py-2 bg-blue-500 text-white rounded-lg">Accept</button>
+        <button (click)="decline(req.requesterId)" class="px-4 py-2 bg-gray-200 rounded-lg">Decline</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -38,8 +38,24 @@
 
     public class Friend
     {
-        public Guid UserId { get; set; }
-        public Guid FriendId { get; set; }
+        // Corresponds to the 'requester_id' column
+        public Guid RequesterId { get; set; }
+
+        // Corresponds to the 'addressee_id' column
+        public Guid AddresseeId { get; set; }
+
+        // Corresponds to the 'status' column
+        public string Status { get; set; }
+
+        // Corresponds to the 'created_at' column
+        public DateTime CreatedAt { get; set; }
+
+        // Corresponds to the 'modified_at' column
+        public DateTime ModifiedAt { get; set; }
+
+        // Navigation properties for joins (optional but highly recommended)
+        public User Requester { get; set; }
+        public User Addressee { get; set; }
     }
     public class Badge
     {

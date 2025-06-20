@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { User, LoginRequest, RegisterRequest, AuthResponse } from '../models/user.model';
 import { NotificationService } from './notification.service';
 import { environment } from 'src/environments/environment';
+import { NotificationStateService } from './notification-state.service';
+import { RealtimeNotificationService } from './realtime-notification.service';
 
 declare const google: any;
 
@@ -21,23 +23,21 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private notify: NotificationService
+    private notify: NotificationService,
+     private notificationState: NotificationStateService,
+     private realtimeNotificationService: RealtimeNotificationService
   ) {
     // The call to restoreSession() is removed from here.
   }
 
   // ==================== NEW METHOD FOR APP_INITIALIZER ====================
-  /**
-   * This is called on app startup. It checks for a token and validates it
-   * against the backend's /me endpoint before the app renders.
-   * It returns an Observable that must complete for the app to continue.
-   */
   public initializeAuthState(): Observable<User | null> {
     const token = this.getToken();
     if (token && !this.isTokenExpired(token)) {
       return this.http.get<User>(`${this.API_URL}/me`).pipe(
         tap(user => {
           this.currentUserSubject.next(user);
+           this.notificationState.fetchFriendRequestCount();
         }),
         catchError(() => {
           this.clearSession();
@@ -73,6 +73,7 @@ export class AuthService {
       tap(resp => this.saveSession(resp)),
       map(() => {
         this.notify.success('Welcome back!', 'Login Successful');
+        this.realtimeNotificationService.startConnection();
       }),
       catchError(err => {
         const msg = err.error?.message || 'Login failed. Please check your credentials.';
@@ -135,11 +136,13 @@ export class AuthService {
     const user: User = { email, firstName, lastName };
     // The user state is now set directly in the BehaviorSubject
     this.currentUserSubject.next(user);
+     this.notificationState.fetchFriendRequestCount(); 
   }
 
   logout() {
     this.clearSession();
     this.notify.info('You have been logged out.', 'Logged Out');
+    this.realtimeNotificationService.stopConnection();
     this.router.navigate(['/auth/login']);
   }
 

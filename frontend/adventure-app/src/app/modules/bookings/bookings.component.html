@@ -1,1 +1,39 @@
-<p>bookings works!</p>
+<div class="max-w-4xl mx-auto p-4 sm:p-6 lg:p-8">
+  <div class="mb-8 text-center">
+    <h1 class="text-4xl font-bold text-gray-800">My Active Adventures</h1>
+    <p class="text-lg text-gray-500 mt-2">Here are the challenges you've accepted. Let's complete them!</p>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="text-center py-10 text-gray-500">
+    <p>Loading your bookings...</p>
+  </div>
+
+  <!-- Main Content -->
+  <div *ngIf="!isLoading">
+    <!-- Empty State -->
+    <div *ngIf="activeChallenges.length === 0" class="text-center bg-white p-10 rounded-xl shadow-sm">
+      <h3 class="text-xl font-semibold text-gray-700">No Active Adventures</h3>
+      <p class="text-gray-500 mt-2">Go to the Home page to accept a new challenge!</p>
+      <button routerLink="/" class="mt-4 px-6 py-2 bg-teal-500 text-white font-semibold rounded-full hover:bg-teal-600">
+        Find Adventures
+      </button>
+    </div>
+
+    <!-- Bookings Grid -->
+    <div *ngIf="activeChallenges.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div *ngFor="let challenge of activeChallenges" class="booking-card">
+        <div class="p-5">
+          <span class="category-badge">{{ challenge.category }}</span>
+          <h3 class="text-xl font-bold text-gray-800 mt-2">{{ challenge.title }}</h3>
+          <p class="text-sm text-gray-600 mt-2 h-16">{{ challenge.description }}</p>
+        </div>
+        <div class="p-5 bg-gray-50 border-t">
+          <button (click)="onComplete(challenge)" class="complete-button">
+            Complete Adventure
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -5,6 +5,9 @@ import { ChallengeService } from 'src/app/services/challenge.service'; // Adjust
 import { NotificationService } from 'src/app/services/notification.service';
 import { Challenge } from 'src/app/models/challenge.model'; // <-- 1. Import the Challenge model
 import { forkJoin } from 'rxjs'; // <-- 2. Import forkJoin to make parallel API calls
+import { HomeStats, ProfileService } from 'src/app/services/profile.service';
+
+
 
 @Component({
   selector: 'app-home',
@@ -14,6 +17,7 @@ import { forkJoin } from 'rxjs'; // <-- 2. Import forkJoin to make parallel API 
 export class HomeComponent implements OnInit {
   // Use the strong type from your model
   challenges: Challenge[] = [];
+  homeStats: HomeStats | null = null;
   
   // This will now store the string UUIDs from the database
   acceptedChallengeIds = new Set<string>();
@@ -22,6 +26,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private challengeService: ChallengeService,
+    private profileService: ProfileService,
     private notify: NotificationService
   ) {}
 
@@ -34,10 +39,15 @@ export class HomeComponent implements OnInit {
 
     const allChallenges$ = this.challengeService.getChallenges();
     const myCompletions$ = this.challengeService.getMyAcceptedChallengeIds();
-    forkJoin([allChallenges$, myCompletions$]).subscribe({
-      next: ([challengesFromApi, acceptedIdsFromApi]) => {
-        this.challenges = challengesFromApi;
-        this.acceptedChallengeIds = new Set(acceptedIdsFromApi);
+    const homeStats$ = this.profileService.getHomeStats();
+     forkJoin([allChallenges$, myCompletions$, homeStats$]).subscribe({
+      next: ([challenges, acceptedIds, homePageStats]) => {
+        this.challenges = challenges;
+        this.acceptedChallengeIds = new Set(acceptedIds);
+
+        // Now we assign the renamed variable, which has no conflicts.
+        this.homeStats = homePageStats;
+
         this.isLoading = false;
       },
       error: (err) => {

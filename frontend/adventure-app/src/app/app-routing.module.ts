@@ -36,6 +36,11 @@ const routes: Routes = [
         path: 'social',
         loadChildren: () =>
           import('./modules/social/social.module').then(m => m.SocialModule)
+      },
+      {
+        path: 'friends',
+        loadChildren: () =>
+          import('./modules/friends/friends.module').then(m => m.FriendsModule)
       }
     ]
   },

@@ -1,0 +1,12 @@
+.booking-card {
+  @apply bg-white rounded-lg shadow-md flex flex-col justify-between overflow-hidden transition-transform hover:scale-105;
+}
+
+.category-badge {
+  @apply text-xs font-semibold uppercase tracking-wider bg-purple-100 text-purple-700 px-2 py-1 rounded-full;
+}
+
+.complete-button {
+  @apply w-full py-2 bg-green-500 text-white font-bold rounded-lg transition-colors hover:bg-green-600;
+  @apply focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-75;
+}

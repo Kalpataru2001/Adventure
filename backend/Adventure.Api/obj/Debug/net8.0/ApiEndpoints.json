@@ -116,6 +116,77 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Adventure.Api.Controller.BookingsController",
+    "Method": "CompleteChallenge",
+    "RelativePath": "api/Bookings/{completionId}/complete",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "completionId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "postText",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ContentType",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ContentDisposition",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Headers",
+        "Type": "Microsoft.AspNetCore.Http.IHeaderDictionary",
+        "IsRequired": false
+      },
+      {
+        "Name": "Length",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "FileName",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Adventure.Api.Controller.BookingsController",
+    "Method": "GetMyActiveChallenges",
+    "RelativePath": "api/Bookings/my-challenges",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Adventure.Api.Controller.BookingsController\u002BActiveChallengeDto, Adventure.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "Adventure.Api.Controller.ChallengesController",
     "Method": "GetChallenges",
     "RelativePath": "api/Challenges",
@@ -170,6 +241,140 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "Adventure.Api.Controller.FriendsController",
+    "Method": "RemoveFriend",
+    "RelativePath": "api/Friends/{friendId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "friendId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Adventure.Api.Controller.FriendsController",
+    "Method": "AcceptFriendRequest",
+    "RelativePath": "api/Friends/accept/{requesterId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "requesterId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Adventure.Api.Controller.FriendsController",
+    "Method": "DeclineOrCancelRequest",
+    "RelativePath": "api/Friends/decline/{otherUserId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "otherUserId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Adventure.Api.Controller.FriendsController",
+    "Method": "FindNewFriends",
+    "RelativePath": "api/Friends/find",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Adventure.Api.Controller.FriendsController\u002BUserDto, Adventure.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Adventure.Api.Controller.FriendsController",
+    "Method": "SendFriendRequest",
+    "RelativePath": "api/Friends/request/{addresseeId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "addresseeId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Adventure.Api.Controller.FriendsController",
+    "Method": "GetIncomingRequests",
+    "RelativePath": "api/Friends/requests/incoming",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Adventure.Api.Controller.FriendsController\u002BFriendRequestDto, Adventure.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Adventure.Api.Controller.NotificationsController",
+    "Method": "GetMyNotifications",
+    "RelativePath": "api/Notifications",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Adventure.Api.Controller.NotificationsController\u002BNotificationDto, Adventure.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Adventure.Api.Controller.NotificationsController",
+    "Method": "MarkAllAsRead",
+    "RelativePath": "api/Notifications/mark-as-read",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "Adventure.Api.Controller.PostsController",
@@ -404,6 +609,26 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Adventure.Api.Controller.ProfileController",
+    "Method": "GetHomeStats",
+    "RelativePath": "api/Profile/home-stats",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "Adventure.Api.Controller.ProfileController\u002BHomeStatsDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "Adventure.Api.Controllers.TestController",

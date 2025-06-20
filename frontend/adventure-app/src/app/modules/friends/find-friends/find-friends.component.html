@@ -1,0 +1,38 @@
+<div class="max-w-2xl mx-auto p-6">
+  <div class="flex items-center justify-between mb-6">
+    <h1 class="text-3xl font-bold">Find New Friends</h1>
+    <a routerLink="/friends/requests" class="text-sm text-blue-600 hover:underline">View Requests</a>
+  </div>
+
+  <div *ngIf="isLoading" class="text-center text-gray-500 py-10">Searching for adventurers...</div>
+
+  <div *ngIf="!isLoading && users.length === 0" class="text-center text-gray-500 py-10">
+    <p>No new users to show right now. Check back later!</p>
+  </div>
+
+  <div *ngIf="!isLoading && users.length > 0" class="space-y-3">
+    <!-- User List Item -->
+    <div *ngFor="let user of users" class="bg-white p-4 rounded-lg shadow-sm flex items-center justify-between">
+      <!-- User Info -->
+      <div class="flex items-center gap-4">
+        <img [src]="user.avatarUrl || 'assets/default-avatar.png'" alt="avatar" class="h-12 w-12 rounded-full object-cover">
+        <div>
+          <p class="font-semibold">{{ user.firstName }} {{ user.lastName }}</p>
+          <p class="text-sm text-gray-500">New Adventurer</p>
+        </div>
+      </div>
+      
+      <!-- Action Button -->
+      <div>
+        <!-- Show "Pending" if a request was just sent -->
+        <button *ngIf="sentRequests.has(user.id)" disabled class="px-4 py-2 bg-gray-200 text-gray-500 rounded-lg text-sm font-semibold">
+          Pending
+        </button>
+        <!-- Show "Add Friend" button otherwise -->
+        <button *ngIf="!sentRequests.has(user.id)" (click)="sendRequest(user)" class="px-4 py-2 bg-blue-500 text-white rounded-lg text-sm font-semibold hover:bg-blue-600">
+          Add Friend
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

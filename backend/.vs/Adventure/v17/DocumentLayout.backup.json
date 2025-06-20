@@ -3,6 +3,46 @@
   "WorkspaceRootPath": "C:\\Users\\Kalpatarusahoo\\Downloads\\Adventure\\Adventure\\backend\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{AC7D108D-DE44-4D9C-B366-60A400D1D35D}|Adventure.Api\\Adventure.Api.csproj|c:\\users\\kalpatarusahoo\\downloads\\adventure\\adventure\\backend\\adventure.api\\controller\\postscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AC7D108D-DE44-4D9C-B366-60A400D1D35D}|Adventure.Api\\Adventure.Api.csproj|solutionrelative:adventure.api\\controller\\postscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AC7D108D-DE44-4D9C-B366-60A400D1D35D}|Adventure.Api\\Adventure.Api.csproj|c:\\users\\kalpatarusahoo\\downloads\\adventure\\adventure\\backend\\adventure.api\\controller\\notificationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AC7D108D-DE44-4D9C-B366-60A400D1D35D}|Adventure.Api\\Adventure.Api.csproj|solutionrelative:adventure.api\\controller\\notificationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AC7D108D-DE44-4D9C-B366-60A400D1D35D}|Adventure.Api\\Adventure.Api.csproj|c:\\users\\kalpatarusahoo\\downloads\\adventure\\adventure\\backend\\adventure.api\\models\\notification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AC7D108D-DE44-4D9C-B366-60A400D1D35D}|Adventure.Api\\Adventure.Api.csproj|solutionrelative:adventure.api\\models\\notification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AC7D108D-DE44-4D9C-B366-60A400D1D35D}|Adventure.Api\\Adventure.Api.csproj|c:\\users\\kalpatarusahoo\\downloads\\adventure\\adventure\\backend\\adventure.api\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AC7D108D-DE44-4D9C-B366-60A400D1D35D}|Adventure.Api\\Adventure.Api.csproj|solutionrelative:adventure.api\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AC7D108D-DE44-4D9C-B366-60A400D1D35D}|Adventure.Api\\Adventure.Api.csproj|c:\\users\\kalpatarusahoo\\downloads\\adventure\\adventure\\backend\\adventure.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AC7D108D-DE44-4D9C-B366-60A400D1D35D}|Adventure.Api\\Adventure.Api.csproj|solutionrelative:adventure.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AC7D108D-DE44-4D9C-B366-60A400D1D35D}|Adventure.Api\\Adventure.Api.csproj|c:\\users\\kalpatarusahoo\\downloads\\adventure\\adventure\\backend\\adventure.api\\hubs\\notificationhub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AC7D108D-DE44-4D9C-B366-60A400D1D35D}|Adventure.Api\\Adventure.Api.csproj|solutionrelative:adventure.api\\hubs\\notificationhub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AC7D108D-DE44-4D9C-B366-60A400D1D35D}|Adventure.Api\\Adventure.Api.csproj|c:\\users\\kalpatarusahoo\\downloads\\adventure\\adventure\\backend\\adventure.api\\controller\\friendscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AC7D108D-DE44-4D9C-B366-60A400D1D35D}|Adventure.Api\\Adventure.Api.csproj|solutionrelative:adventure.api\\controller\\friendscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AC7D108D-DE44-4D9C-B366-60A400D1D35D}|Adventure.Api\\Adventure.Api.csproj|c:\\users\\kalpatarusahoo\\downloads\\adventure\\adventure\\backend\\adventure.api\\models\\profiledatadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AC7D108D-DE44-4D9C-B366-60A400D1D35D}|Adventure.Api\\Adventure.Api.csproj|solutionrelative:adventure.api\\models\\profiledatadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AC7D108D-DE44-4D9C-B366-60A400D1D35D}|Adventure.Api\\Adventure.Api.csproj|c:\\users\\kalpatarusahoo\\downloads\\adventure\\adventure\\backend\\adventure.api\\controller\\profilecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AC7D108D-DE44-4D9C-B366-60A400D1D35D}|Adventure.Api\\Adventure.Api.csproj|solutionrelative:adventure.api\\controller\\profilecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AC7D108D-DE44-4D9C-B366-60A400D1D35D}|Adventure.Api\\Adventure.Api.csproj|c:\\users\\kalpatarusahoo\\downloads\\adventure\\adventure\\backend\\adventure.api\\controller\\bookingscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AC7D108D-DE44-4D9C-B366-60A400D1D35D}|Adventure.Api\\Adventure.Api.csproj|solutionrelative:adventure.api\\controller\\bookingscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{AC7D108D-DE44-4D9C-B366-60A400D1D35D}|Adventure.Api\\Adventure.Api.csproj|c:\\users\\kalpatarusahoo\\downloads\\adventure\\adventure\\backend\\adventure.api\\services\\supabasefileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AC7D108D-DE44-4D9C-B366-60A400D1D35D}|Adventure.Api\\Adventure.Api.csproj|solutionrelative:adventure.api\\services\\supabasefileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -11,32 +51,12 @@
       "RelativeMoniker": "D:0:0:{AC7D108D-DE44-4D9C-B366-60A400D1D35D}|Adventure.Api\\Adventure.Api.csproj|solutionrelative:adventure.api\\services\\ifileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AC7D108D-DE44-4D9C-B366-60A400D1D35D}|Adventure.Api\\Adventure.Api.csproj|c:\\users\\kalpatarusahoo\\downloads\\adventure\\adventure\\backend\\adventure.api\\controller\\postscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AC7D108D-DE44-4D9C-B366-60A400D1D35D}|Adventure.Api\\Adventure.Api.csproj|solutionrelative:adventure.api\\controller\\postscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AC7D108D-DE44-4D9C-B366-60A400D1D35D}|Adventure.Api\\Adventure.Api.csproj|c:\\users\\kalpatarusahoo\\downloads\\adventure\\adventure\\backend\\adventure.api\\controller\\profilecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AC7D108D-DE44-4D9C-B366-60A400D1D35D}|Adventure.Api\\Adventure.Api.csproj|solutionrelative:adventure.api\\controller\\profilecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AC7D108D-DE44-4D9C-B366-60A400D1D35D}|Adventure.Api\\Adventure.Api.csproj|c:\\users\\kalpatarusahoo\\downloads\\adventure\\adventure\\backend\\adventure.api\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AC7D108D-DE44-4D9C-B366-60A400D1D35D}|Adventure.Api\\Adventure.Api.csproj|solutionrelative:adventure.api\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AC7D108D-DE44-4D9C-B366-60A400D1D35D}|Adventure.Api\\Adventure.Api.csproj|c:\\users\\kalpatarusahoo\\downloads\\adventure\\adventure\\backend\\adventure.api\\models\\profiledatadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AC7D108D-DE44-4D9C-B366-60A400D1D35D}|Adventure.Api\\Adventure.Api.csproj|solutionrelative:adventure.api\\models\\profiledatadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{AC7D108D-DE44-4D9C-B366-60A400D1D35D}|Adventure.Api\\Adventure.Api.csproj|c:\\users\\kalpatarusahoo\\downloads\\adventure\\adventure\\backend\\adventure.api\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AC7D108D-DE44-4D9C-B366-60A400D1D35D}|Adventure.Api\\Adventure.Api.csproj|solutionrelative:adventure.api\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{AC7D108D-DE44-4D9C-B366-60A400D1D35D}|Adventure.Api\\Adventure.Api.csproj|c:\\users\\kalpatarusahoo\\downloads\\adventure\\adventure\\backend\\adventure.api\\adventure.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{AC7D108D-DE44-4D9C-B366-60A400D1D35D}|Adventure.Api\\Adventure.Api.csproj|solutionrelative:adventure.api\\adventure.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AC7D108D-DE44-4D9C-B366-60A400D1D35D}|Adventure.Api\\Adventure.Api.csproj|c:\\users\\kalpatarusahoo\\downloads\\adventure\\adventure\\backend\\adventure.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AC7D108D-DE44-4D9C-B366-60A400D1D35D}|Adventure.Api\\Adventure.Api.csproj|solutionrelative:adventure.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{AC7D108D-DE44-4D9C-B366-60A400D1D35D}|Adventure.Api\\Adventure.Api.csproj|c:\\users\\kalpatarusahoo\\downloads\\adventure\\adventure\\backend\\adventure.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
@@ -98,7 +118,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
@@ -106,43 +126,111 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Notification.cs",
+              "DocumentMoniker": "C:\\Users\\Kalpatarusahoo\\Downloads\\Adventure\\Adventure\\backend\\Adventure.Api\\Models\\Notification.cs",
+              "RelativeDocumentMoniker": "Adventure.Api\\Models\\Notification.cs",
+              "ToolTip": "C:\\Users\\Kalpatarusahoo\\Downloads\\Adventure\\Adventure\\backend\\Adventure.Api\\Models\\Notification.cs",
+              "RelativeToolTip": "Adventure.Api\\Models\\Notification.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-20T10:35:32.539Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "NotificationsController.cs",
+              "DocumentMoniker": "C:\\Users\\Kalpatarusahoo\\Downloads\\Adventure\\Adventure\\backend\\Adventure.Api\\Controller\\NotificationsController.cs",
+              "RelativeDocumentMoniker": "Adventure.Api\\Controller\\NotificationsController.cs",
+              "ToolTip": "C:\\Users\\Kalpatarusahoo\\Downloads\\Adventure\\Adventure\\backend\\Adventure.Api\\Controller\\NotificationsController.cs",
+              "RelativeToolTip": "Adventure.Api\\Controller\\NotificationsController.cs",
+              "ViewState": "AgIAACYAAAAAAAAAAAAwwC8AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-20T10:33:35.684Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "NotificationHub.cs",
+              "DocumentMoniker": "C:\\Users\\Kalpatarusahoo\\Downloads\\Adventure\\Adventure\\backend\\Adventure.Api\\Hubs\\NotificationHub.cs",
+              "RelativeDocumentMoniker": "Adventure.Api\\Hubs\\NotificationHub.cs",
+              "ToolTip": "C:\\Users\\Kalpatarusahoo\\Downloads\\Adventure\\Adventure\\backend\\Adventure.Api\\Hubs\\NotificationHub.cs",
+              "RelativeToolTip": "Adventure.Api\\Hubs\\NotificationHub.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-20T10:29:27.862Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 6,
+              "Title": "FriendsController.cs",
+              "DocumentMoniker": "C:\\Users\\Kalpatarusahoo\\Downloads\\Adventure\\Adventure\\backend\\Adventure.Api\\Controller\\FriendsController.cs",
+              "RelativeDocumentMoniker": "Adventure.Api\\Controller\\FriendsController.cs",
+              "ToolTip": "C:\\Users\\Kalpatarusahoo\\Downloads\\Adventure\\Adventure\\backend\\Adventure.Api\\Controller\\FriendsController.cs",
+              "RelativeToolTip": "Adventure.Api\\Controller\\FriendsController.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAA8AAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-20T06:24:19.179Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "BookingsController.cs",
+              "DocumentMoniker": "C:\\Users\\Kalpatarusahoo\\Downloads\\Adventure\\Adventure\\backend\\Adventure.Api\\Controller\\BookingsController.cs",
+              "RelativeDocumentMoniker": "Adventure.Api\\Controller\\BookingsController.cs",
+              "ToolTip": "C:\\Users\\Kalpatarusahoo\\Downloads\\Adventure\\Adventure\\backend\\Adventure.Api\\Controller\\BookingsController.cs",
+              "RelativeToolTip": "Adventure.Api\\Controller\\BookingsController.cs",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAQwFQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-20T04:42:40.385Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\Kalpatarusahoo\\Downloads\\Adventure\\Adventure\\backend\\Adventure.Api\\Models\\User.cs",
               "RelativeDocumentMoniker": "Adventure.Api\\Models\\User.cs",
               "ToolTip": "C:\\Users\\Kalpatarusahoo\\Downloads\\Adventure\\Adventure\\backend\\Adventure.Api\\Models\\User.cs",
               "RelativeToolTip": "Adventure.Api\\Models\\User.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAAAgwA4AAAAWAAAAAAAAAA==",
+              "ViewState": "AgIAABEAAAAAAAAAAAA1wA4AAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-16T14:15:45.359Z"
+              "WhenOpened": "2025-06-16T14:15:45.359Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "AppDbContext.cs",
               "DocumentMoniker": "C:\\Users\\Kalpatarusahoo\\Downloads\\Adventure\\Adventure\\backend\\Adventure.Api\\Data\\AppDbContext.cs",
               "RelativeDocumentMoniker": "Adventure.Api\\Data\\AppDbContext.cs",
               "ToolTip": "C:\\Users\\Kalpatarusahoo\\Downloads\\Adventure\\Adventure\\backend\\Adventure.Api\\Data\\AppDbContext.cs",
               "RelativeToolTip": "Adventure.Api\\Data\\AppDbContext.cs",
-              "ViewState": "AgIAACcAAAAAAAAAAAAiwC0AAAA0AAAAAAAAAA==",
+              "ViewState": "AgIAADsAAAAAAAAAAADwv0AAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-16T10:27:27.49Z"
+              "WhenOpened": "2025-06-16T10:27:27.49Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "PostsController.cs",
               "DocumentMoniker": "C:\\Users\\Kalpatarusahoo\\Downloads\\Adventure\\Adventure\\backend\\Adventure.Api\\Controller\\PostsController.cs",
               "RelativeDocumentMoniker": "Adventure.Api\\Controller\\PostsController.cs",
               "ToolTip": "C:\\Users\\Kalpatarusahoo\\Downloads\\Adventure\\Adventure\\backend\\Adventure.Api\\Controller\\PostsController.cs",
               "RelativeToolTip": "Adventure.Api\\Controller\\PostsController.cs",
-              "ViewState": "AgIAANEAAAAAAAAAAAAqwO8AAABAAAAAAAAAAA==",
+              "ViewState": "AgIAAG8AAAAAAAAAAAAcwHcAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-19T16:45:50.812Z"
+              "WhenOpened": "2025-06-19T16:45:50.812Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 11,
               "Title": "IFileService.cs",
               "DocumentMoniker": "C:\\Users\\Kalpatarusahoo\\Downloads\\Adventure\\Adventure\\backend\\Adventure.Api\\Services\\IFileService.cs",
               "RelativeDocumentMoniker": "Adventure.Api\\Services\\IFileService.cs",
@@ -150,48 +238,51 @@
               "RelativeToolTip": "Adventure.Api\\Services\\IFileService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-19T15:39:53.528Z"
+              "WhenOpened": "2025-06-19T15:39:53.528Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 10,
               "Title": "SupabaseFileService.cs",
               "DocumentMoniker": "C:\\Users\\Kalpatarusahoo\\Downloads\\Adventure\\Adventure\\backend\\Adventure.Api\\Services\\SupabaseFileService.cs",
               "RelativeDocumentMoniker": "Adventure.Api\\Services\\SupabaseFileService.cs",
               "ToolTip": "C:\\Users\\Kalpatarusahoo\\Downloads\\Adventure\\Adventure\\backend\\Adventure.Api\\Services\\SupabaseFileService.cs",
               "RelativeToolTip": "Adventure.Api\\Services\\SupabaseFileService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAABOAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-19T15:40:25.288Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 8,
               "Title": "ProfileController.cs",
               "DocumentMoniker": "C:\\Users\\Kalpatarusahoo\\Downloads\\Adventure\\Adventure\\backend\\Adventure.Api\\Controller\\ProfileController.cs",
               "RelativeDocumentMoniker": "Adventure.Api\\Controller\\ProfileController.cs",
               "ToolTip": "C:\\Users\\Kalpatarusahoo\\Downloads\\Adventure\\Adventure\\backend\\Adventure.Api\\Controller\\ProfileController.cs",
               "RelativeToolTip": "Adventure.Api\\Controller\\ProfileController.cs",
-              "ViewState": "AgIAAFoAAAAAAAAAAAAswGkAAABEAAAAAAAAAA==",
+              "ViewState": "AgIAAKUAAAAAAAAAAAAAwK4AAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-18T09:29:52.618Z"
+              "WhenOpened": "2025-06-18T09:29:52.618Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "ProfileDataDto.cs",
               "DocumentMoniker": "C:\\Users\\Kalpatarusahoo\\Downloads\\Adventure\\Adventure\\backend\\Adventure.Api\\Models\\ProfileDataDto.cs",
               "RelativeDocumentMoniker": "Adventure.Api\\Models\\ProfileDataDto.cs",
               "ToolTip": "C:\\Users\\Kalpatarusahoo\\Downloads\\Adventure\\Adventure\\backend\\Adventure.Api\\Models\\ProfileDataDto.cs",
               "RelativeToolTip": "Adventure.Api\\Models\\ProfileDataDto.cs",
-              "ViewState": "AgIAAEgAAAAAAAAAAAApwFAAAAA6AAAAAAAAAA==",
+              "ViewState": "AgIAAC8AAAAAAAAAAAA1wDkAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-18T09:28:55.47Z"
+              "WhenOpened": "2025-06-18T09:28:55.47Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 15,
               "Title": "appsettings.Development.json",
               "DocumentMoniker": "C:\\Users\\Kalpatarusahoo\\Downloads\\Adventure\\Adventure\\backend\\Adventure.Api\\appsettings.Development.json",
               "RelativeDocumentMoniker": "Adventure.Api\\appsettings.Development.json",
@@ -199,11 +290,12 @@
               "RelativeToolTip": "Adventure.Api\\appsettings.Development.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-06-19T12:22:03.405Z"
+              "WhenOpened": "2025-06-19T12:22:03.405Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 14,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\Kalpatarusahoo\\Downloads\\Adventure\\Adventure\\backend\\Adventure.Api\\appsettings.json",
               "RelativeDocumentMoniker": "Adventure.Api\\appsettings.json",
@@ -211,11 +303,12 @@
               "RelativeToolTip": "Adventure.Api\\appsettings.json",
               "ViewState": "AgIAABAAAAAAAAAAAAAIwBcAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-06-19T12:24:18.873Z"
+              "WhenOpened": "2025-06-19T12:24:18.873Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 13,
               "Title": "Adventure.Api.csproj",
               "DocumentMoniker": "C:\\Users\\Kalpatarusahoo\\Downloads\\Adventure\\Adventure\\backend\\Adventure.Api\\Adventure.Api.csproj",
               "RelativeDocumentMoniker": "Adventure.Api\\Adventure.Api.csproj",
@@ -223,47 +316,51 @@
               "RelativeToolTip": "Adventure.Api\\Adventure.Api.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-06-19T15:45:22.23Z"
+              "WhenOpened": "2025-06-19T15:45:22.23Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 26,
               "Title": "Completion.cs",
               "DocumentMoniker": "C:\\Users\\Kalpatarusahoo\\Downloads\\Adventure\\Adventure\\backend\\Adventure.Api\\Models\\Completion.cs",
               "RelativeDocumentMoniker": "Adventure.Api\\Models\\Completion.cs",
               "ToolTip": "C:\\Users\\Kalpatarusahoo\\Downloads\\Adventure\\Adventure\\backend\\Adventure.Api\\Models\\Completion.cs",
               "RelativeToolTip": "Adventure.Api\\Models\\Completion.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAzwAYAAAAtAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAuwAYAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-18T06:45:12.136Z"
+              "WhenOpened": "2025-06-18T06:45:12.136Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 4,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Kalpatarusahoo\\Downloads\\Adventure\\Adventure\\backend\\Adventure.Api\\Program.cs",
               "RelativeDocumentMoniker": "Adventure.Api\\Program.cs",
               "ToolTip": "C:\\Users\\Kalpatarusahoo\\Downloads\\Adventure\\Adventure\\backend\\Adventure.Api\\Program.cs",
               "RelativeToolTip": "Adventure.Api\\Program.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAAowB8AAABCAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAkAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-16T14:01:11.737Z"
+              "WhenOpened": "2025-06-16T14:01:11.737Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 19,
               "Title": "SendGridEmailService.cs",
               "DocumentMoniker": "C:\\Users\\Kalpatarusahoo\\Downloads\\Adventure\\Adventure\\backend\\Adventure.Api\\Services\\SendGridEmailService.cs",
               "RelativeDocumentMoniker": "Adventure.Api\\Services\\SendGridEmailService.cs",
               "ToolTip": "C:\\Users\\Kalpatarusahoo\\Downloads\\Adventure\\Adventure\\backend\\Adventure.Api\\Services\\SendGridEmailService.cs",
               "RelativeToolTip": "Adventure.Api\\Services\\SendGridEmailService.cs",
-              "ViewState": "AgIAACsAAAAAAAAAAIBJwC4AAAABAAAAAAAAAA==",
+              "ViewState": "AgIAACgAAAAAAAAAAIBZwC4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-17T10:05:56.944Z"
+              "WhenOpened": "2025-06-17T10:05:56.944Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 20,
               "Title": "IEmailService.cs",
               "DocumentMoniker": "C:\\Users\\Kalpatarusahoo\\Downloads\\Adventure\\Adventure\\backend\\Adventure.Api\\Services\\IEmailService.cs",
               "RelativeDocumentMoniker": "Adventure.Api\\Services\\IEmailService.cs",
@@ -271,11 +368,12 @@
               "RelativeToolTip": "Adventure.Api\\Services\\IEmailService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-17T10:04:50.653Z"
+              "WhenOpened": "2025-06-17T10:04:50.653Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 17,
               "Title": "AuthController.cs",
               "DocumentMoniker": "C:\\Users\\Kalpatarusahoo\\Downloads\\Adventure\\Adventure\\backend\\Adventure.Api\\Controller\\AuthController.cs",
               "RelativeDocumentMoniker": "Adventure.Api\\Controller\\AuthController.cs",
@@ -283,11 +381,12 @@
               "RelativeToolTip": "Adventure.Api\\Controller\\AuthController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-16T14:31:56.968Z"
+              "WhenOpened": "2025-06-16T14:31:56.968Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 22,
               "Title": "TokenService.cs",
               "DocumentMoniker": "C:\\Users\\Kalpatarusahoo\\Downloads\\Adventure\\Adventure\\backend\\Adventure.Api\\Services\\TokenService.cs",
               "RelativeDocumentMoniker": "Adventure.Api\\Services\\TokenService.cs",
@@ -295,11 +394,12 @@
               "RelativeToolTip": "Adventure.Api\\Services\\TokenService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAABCAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-16T14:25:45.426Z"
+              "WhenOpened": "2025-06-16T14:25:45.426Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 23,
               "Title": "ITokenService.cs",
               "DocumentMoniker": "C:\\Users\\Kalpatarusahoo\\Downloads\\Adventure\\Adventure\\backend\\Adventure.Api\\Services\\ITokenService.cs",
               "RelativeDocumentMoniker": "Adventure.Api\\Services\\ITokenService.cs",
@@ -307,11 +407,12 @@
               "RelativeToolTip": "Adventure.Api\\Services\\ITokenService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-16T14:25:10.26Z"
+              "WhenOpened": "2025-06-16T14:25:10.26Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 16,
               "Title": "AuthDtos.cs",
               "DocumentMoniker": "C:\\Users\\Kalpatarusahoo\\Downloads\\Adventure\\Adventure\\backend\\Adventure.Api\\Models\\AuthDtos.cs",
               "RelativeDocumentMoniker": "Adventure.Api\\Models\\AuthDtos.cs",
@@ -319,11 +420,12 @@
               "RelativeToolTip": "Adventure.Api\\Models\\AuthDtos.cs",
               "ViewState": "AgIAAAoAAAAAAAAAAAAgwAUAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-16T14:21:30.807Z"
+              "WhenOpened": "2025-06-16T14:21:30.807Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 18,
               "Title": "ChallengesController.cs",
               "DocumentMoniker": "C:\\Users\\Kalpatarusahoo\\Downloads\\Adventure\\Adventure\\backend\\Adventure.Api\\Controller\\ChallengesController.cs",
               "RelativeDocumentMoniker": "Adventure.Api\\Controller\\ChallengesController.cs",
@@ -331,11 +433,12 @@
               "RelativeToolTip": "Adventure.Api\\Controller\\ChallengesController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAIBJwFkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-16T10:28:36.604Z"
+              "WhenOpened": "2025-06-16T10:28:36.604Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 24,
               "Title": "TestController.cs",
               "DocumentMoniker": "C:\\Users\\Kalpatarusahoo\\Downloads\\Adventure\\Adventure\\backend\\Adventure.Api\\Controller\\TestController.cs",
               "RelativeDocumentMoniker": "Adventure.Api\\Controller\\TestController.cs",
@@ -343,11 +446,12 @@
               "RelativeToolTip": "Adventure.Api\\Controller\\TestController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-16T10:27:43.798Z"
+              "WhenOpened": "2025-06-16T10:27:43.798Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 21,
               "Title": "Challenge.cs",
               "DocumentMoniker": "C:\\Users\\Kalpatarusahoo\\Downloads\\Adventure\\Adventure\\backend\\Adventure.Api\\Models\\Challenge.cs",
               "RelativeDocumentMoniker": "Adventure.Api\\Models\\Challenge.cs",
@@ -355,11 +459,12 @@
               "RelativeToolTip": "Adventure.Api\\Models\\Challenge.cs",
               "ViewState": "AgIAAAIAAAAAAAAAAAAAwAgAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-16T10:25:30.29Z"
+              "WhenOpened": "2025-06-16T10:25:30.29Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 25,
               "Title": "launchSettings.json",
               "DocumentMoniker": "C:\\Users\\Kalpatarusahoo\\Downloads\\Adventure\\Adventure\\backend\\Adventure.Api\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "Adventure.Api\\Properties\\launchSettings.json",
@@ -367,7 +472,8 @@
               "RelativeToolTip": "Adventure.Api\\Properties\\launchSettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAIBZwAoAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-06-16T10:21:27.939Z"
+              "WhenOpened": "2025-06-16T10:21:27.939Z",
+              "EditorCaption": ""
             }
           ]
         }

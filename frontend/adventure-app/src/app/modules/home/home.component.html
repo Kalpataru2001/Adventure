@@ -72,42 +72,35 @@
     <!-- ===================== END: MODIFIED SECTION ===================== -->
 
 
-    <!-- Stats Card (Untouched) -->
-    <div class="bg-white rounded-xl shadow-lg p-6">
-      <div class="flex justify-between items-center mb-4">
-        <h2 class="text-gray-800 text-xl font-semibold">Your Stats</h2>
-        <span class="text-red-400 font-bold flex items-center">
-          <svg class="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 20 20">
-            <path
-              d="M3.172 5.172a4 4 0 015.656
-                 0L10 6.343l1.172-1.171a4
-                 4 0 115.656 5.656L10
-                 18.657l-6.828-6.828a4
-                 4 0 010-5.657z"
-            />
-          </svg>
-          7‑Day Streak
-        </span>
-      </div>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-        <div>
-          <div class="text-3xl font-bold text-teal-500">23</div>
-          <div class="text-sm text-gray-600">Adventures</div>
-        </div>
-        <div>
-          <div class="text-3xl font-bold text-teal-500">8</div>
-          <div class="text-sm text-gray-600">Badges</div>
-        </div>
-        <div>
-          <div class="text-3xl font-bold text-teal-500">152</div>
-          <div class="text-sm text-gray-600">Points</div>
-        </div>
-        <div>
-          <div class="text-3xl font-bold text-teal-500">34</div>
-          <div class="text-sm text-gray-600">Friends Met</div>
-        </div>
-      </div>
+    <!-- Stats Card -->
+<div *ngIf="homeStats" class="bg-white rounded-xl shadow-lg p-6">
+  <div class="flex justify-between items-center mb-4">
+    <h2 class="text-gray-800 text-xl font-semibold">Your Stats</h2>
+    <span class="text-red-400 font-bold flex items-center">
+      <svg class="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 20 20"><path d="..."/></svg>
+      {{ homeStats.currentStreak }}-Day Streak
+    </span>
+  </div>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+    <div>
+      <div class="text-3xl font-bold text-teal-500">{{ homeStats.totalAdventures }}</div>
+      <div class="text-sm text-gray-600">Adventures</div>
     </div>
+    <div>
+      <div class="text-3xl font-bold text-teal-500">{{ homeStats.badgesCount }}</div>
+      <div class="text-sm text-gray-600">Badges</div>
+    </div>
+    <div>
+      <!-- Points are not in the DTO yet, you can add them later -->
+      <div class="text-3xl font-bold text-teal-500">152</div>
+      <div class="text-sm text-gray-600">Points</div>
+    </div>
+    <div>
+      <div class="text-3xl font-bold text-teal-500">{{ homeStats.friendsCount }}</div>
+      <div class="text-sm text-gray-600">Friends Met</div>
+    </div>
+  </div>
+</div>
 
   </main>
 </div>

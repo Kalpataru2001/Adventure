@@ -1,7 +1,9 @@
 using System.Text;
 using Adventure.Api.Data;
+using Adventure.Api.Hubs;
 using Adventure.Api.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -30,6 +32,9 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IEmailService, SendGridEmailService>();
+builder.Services.AddSignalR();
+builder.Services.AddSingleton<IUserIdProvider, UserIdProvider>();
+
 // In Program.cs, with your other services
 builder.Services.AddScoped<IFileService, SupabaseFileService>();
 
@@ -75,5 +80,6 @@ app.UseCors("AllowAngularApp");
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+app.MapHub<NotificationHub>("/notificationHub");
 app.MapControllers();
 app.Run();

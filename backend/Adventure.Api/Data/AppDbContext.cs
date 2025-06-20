@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Adventure.Api.Models;
+using System.Reactive;
 
 namespace Adventure.Api.Data
 {
@@ -34,17 +35,31 @@ namespace Adventure.Api.Data
 
             // Configure the composite primary key for the 'Friend' entity
             modelBuilder.Entity<Friend>()
-                .HasKey(f => new { f.UserId, f.FriendId });
+       .HasKey(f => new { f.RequesterId, f.AddresseeId });
+
+            modelBuilder.Entity<Friend>()
+                    .HasOne(f => f.Requester)
+                    .WithMany() // A user can send many requests
+                    .HasForeignKey(f => f.RequesterId)
+                    .OnDelete(DeleteBehavior.Restrict); // Avoids complex delete cycles
+
+            modelBuilder.Entity<Friend>()
+                .HasOne(f => f.Addressee)
+                .WithMany() // A user can receive many requests
+                .HasForeignKey(f => f.AddresseeId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             // Configure the composite primary key for the 'UserBadge' entity
             modelBuilder.Entity<UserBadge>()
                 .HasKey(ub => new { ub.UserId, ub.BadgeId });
+            modelBuilder.Entity<Profile>()
+                      .HasKey(p => p.UserId);
 
             modelBuilder.Entity<PostLike>()
                 .HasKey(pl => new { pl.PostId, pl.UserId }); // Composite key
         }
         public DbSet<Comment> Comments { get; set; }
 
-
+        public DbSet<Adventure.Api.Models.Notification> Notifications { get; set; }
     }
 }

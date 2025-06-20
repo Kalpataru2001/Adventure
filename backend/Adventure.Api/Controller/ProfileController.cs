@@ -28,30 +28,57 @@ public class ProfileController : ControllerBase
     public async Task<ActionResult<ProfileDataDto>> GetProfileData()
     {
         var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        if (!Guid.TryParse(userIdString, out var userId)) { return Unauthorized(); }
+        if (!Guid.TryParse(userIdString, out var userId))
+        {
+            return Unauthorized();
+        }
 
+        // Using the single, injected _context for all queries.
         var user = await _context.Users.FindAsync(userId);
-        if (user == null) { return NotFound("User not found."); }
+        if (user == null)
+        {
+            return NotFound("User not found.");
+        }
+
+        // --- All queries are now run sequentially for safety and simplicity ---
 
         var profile = await _context.Profiles.FindAsync(userId);
         var totalAdventures = await _context.Completions.CountAsync(c => c.UserId == userId);
-        var friendsCount = await _context.Friends.CountAsync(f => f.UserId == userId);
-        var currentStreak = await _context.Streaks.Where(s => s.UserId == userId).Select(s => s.CurrentStreak ?? 0).FirstOrDefaultAsync();
-        var badges = await _context.UserBadges.Where(ub => ub.UserId == userId).Join(_context.Badges, ub => ub.BadgeId, b => b.Id, (ub, b) => new BadgeDto { Name = b.Name, IconUrl = b.IconUrl }).ToListAsync();
 
+        // THIS IS THE FIX: Querying the new 'friends' table structure correctly.
+        var friendsCount = await _context.Friends
+            .CountAsync(f => f.RequesterId == userId && f.Status == "accepted");
+
+        var currentStreak = await _context.Streaks
+            .Where(s => s.UserId == userId)
+            .Select(s => s.CurrentStreak ?? 0)
+            .FirstOrDefaultAsync();
+
+        var badges = await _context.UserBadges
+            .Where(ub => ub.UserId == userId)
+            .Join(_context.Badges, ub => ub.BadgeId, b => b.Id, (ub, b) => new BadgeDto { Name = b.Name, IconUrl = b.IconUrl })
+            .ToListAsync();
+
+        // Assemble the final DTO
         var profileData = new ProfileDataDto
         {
             FirstName = user.FirstName,
             LastName = user.LastName,
-            AvatarUrl = profile?.AvatarUrl, // Get avatar from profile
+            AvatarUrl = profile?.AvatarUrl,
             MemberSince = user.CreatedAt,
             Level = (totalAdventures / 5) + 1,
-            Stats = new ProfileStatsDto { TotalAdventures = totalAdventures, FriendsCount = friendsCount, CurrentStreak = currentStreak },
+            Stats = new ProfileStatsDto
+            {
+                TotalAdventures = totalAdventures,
+                FriendsCount = friendsCount,
+                CurrentStreak = currentStreak
+            },
             Badges = badges
         };
 
         return Ok(profileData);
     }
+
 
 
     [HttpPut]
@@ -115,5 +142,40 @@ public class ProfileController : ControllerBase
 
         // Return the new URL so the frontend can update immediately
         return Ok(new { avatarUrl = publicUrl });
+    }
+
+    // Inside ProfileController.cs, add this new DTO
+    public record HomeStatsDto(
+        int TotalAdventures,
+        int BadgesCount,
+        int CurrentStreak,
+        int FriendsCount
+    );
+
+    // Add this new endpoint to the controller
+    [HttpGet("home-stats")]
+    public async Task<ActionResult<HomeStatsDto>> GetHomeStats()
+    {
+        var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
+        // Running these in parallel is safe if you use a DbContextFactory.
+        // To keep it simple and match the fix above, let's also do them sequentially here.
+
+        var adventuresCount = await _context.Completions.CountAsync(c => c.UserId == userId);
+        var badgesCount = await _context.UserBadges.CountAsync(ub => ub.UserId == userId);
+        var streakCount = await _context.Streaks.Where(s => s.UserId == userId).Select(s => s.CurrentStreak ?? 0).FirstOrDefaultAsync();
+
+        // THIS IS THE FIX: Querying the new 'friends' table structure correctly.
+        var friendsCount = await _context.Friends
+            .CountAsync(f => f.RequesterId == userId && f.Status == "accepted");
+
+        var stats = new HomeStatsDto(
+            adventuresCount,
+            badgesCount,
+            streakCount,
+            friendsCount
+        );
+
+        return Ok(stats);
     }
 }

@@ -8,7 +8,7 @@ import { catchError } from 'rxjs/operators';
 export interface ProfileData {
     firstName: string;
     lastName: string;
-     avatarUrl: string | null;
+    avatarUrl: string | null;
     memberSince: string;
     level: number;
     stats: {
@@ -20,6 +20,12 @@ export interface ProfileData {
         name: string;
         iconUrl: string; // This will hold the emoji, e.g., '🍜'
     }[];
+}
+export interface HomeStats {
+    totalAdventures: number;
+    badgesCount: number;
+    currentStreak: number;
+    friendsCount: number;
 }
 
 @Injectable({
@@ -43,13 +49,18 @@ export class ProfileService {
         return this.http.put(this.apiUrl, { firstName, lastName });
     }
     updateAvatar(avatarUrl: string): Observable<any> {
-    return this.http.put(`${this.apiUrl}/avatar`, { avatarUrl });
-  }
+        return this.http.put(`${this.apiUrl}/avatar`, { avatarUrl });
+    }
     uploadAvatar(file: File): Observable<{ avatarUrl: string }> {
         const formData = new FormData();
         formData.append('file', file, file.name);
 
         // The backend endpoint is /api/profile/avatar
         return this.http.post<{ avatarUrl: string }>(`${this.apiUrl}/avatar`, formData);
+    }
+    getHomeStats(): Observable<HomeStats | null> {
+        return this.http.get<HomeStats>(`${this.apiUrl}/home-stats`).pipe(
+            catchError(() => of(null))
+        );
     }
 }
