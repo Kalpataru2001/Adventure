@@ -6,6 +6,7 @@ import { GroupListComponent } from './group-list/group-list.component';
 import { GroupCreateComponent } from './group-create/group-create.component';
 import { GroupsComponent } from './groups/groups.component';
 import { GroupDetailComponent } from './group-detail/group-detail.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { GroupDetailComponent } from './group-detail/group-detail.component';
   ],
   imports: [
     CommonModule,
-    GroupsRoutingModule
+    GroupsRoutingModule,
+    FormsModule
   ]
 })
 export class GroupsModule { }
