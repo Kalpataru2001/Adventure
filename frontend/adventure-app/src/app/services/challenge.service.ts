@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, of } from 'rxjs';
 import { Challenge } from '../models/challenge.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChallengeService {
-   private readonly apiUrl = 'https://localhost:44384/api';
+   private readonly apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
 

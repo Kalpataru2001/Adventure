@@ -16,11 +16,13 @@ namespace Adventure.Api.Controller
     {
         private readonly AppDbContext _context;
         private readonly IFileService _fileService;
+        private readonly IBadgeService _badgeService;
 
-        public BookingsController(AppDbContext context, IFileService fileService)
+        public BookingsController(AppDbContext context, IFileService fileService, IBadgeService badgeService)
         {
             _context = context;
             _fileService = fileService;
+            _badgeService = badgeService;
         }
 
         // A DTO for the data we send to the bookings page
@@ -101,6 +103,7 @@ namespace Adventure.Api.Controller
 
             // 4. Save everything to the database
             await _context.SaveChangesAsync();
+            await _badgeService.CheckAndAwardBadgesAsync(userId);
 
             return Ok(new { message = "Adventure completed and shared!" });
         }

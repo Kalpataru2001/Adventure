@@ -24,4 +24,7 @@ export class BookingService {
 
     return this.http.post(`${this.apiUrl}/${completionId}/complete`, formData);
   }
+  updateStreak(): Observable<any> {
+    return this.http.post(`${this.apiUrl}/../streaks/update`, {}); // Note the relative path
+  }
 }

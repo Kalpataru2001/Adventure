@@ -8,6 +8,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
+import { MomentModule } from 'ngx-moment';
 
 import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
@@ -34,6 +35,7 @@ export function appInitializer(authService: AuthService) {
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    MomentModule,
     AppRoutingModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 // This is the model for the data we expect from the API.
 // It's good practice to define it.
@@ -32,7 +33,7 @@ export interface HomeStats {
     providedIn: 'root'
 })
 export class ProfileService {
-    private readonly apiUrl = 'https://localhost:44384/api/Profile';
+    private readonly apiUrl = environment.apiUrl + '/Profile';
 
     constructor(private http: HttpClient) { }
 

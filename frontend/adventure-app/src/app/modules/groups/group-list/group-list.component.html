@@ -1,0 +1,22 @@
+<div class="max-w-4xl mx-auto p-6">
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-3xl font-bold">My Groups</h1>
+        <button (click)="onCreateGroup()" class="px-4 py-2 bg-blue-500 text-white rounded-lg">
+            Create Group
+        </button>
+    </div>
+
+    <div *ngIf="isLoading">Loading groups...</div>
+
+    <div *ngIf="!isLoading && groups.length === 0" class="text-center text-gray-500">
+        You're not a part of any groups yet. Why not create one?
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <a *ngFor="let group of groups" [routerLink]="['/groups', group.id]"
+            class="block bg-white p-5 rounded-lg shadow-sm hover:shadow-lg transition-shadow cursor-pointer">
+            <h3 class="text-xl font-semibold">{{ group.name }}</h3>
+            <p class="text-sm text-gray-500">{{ group.memberCount }} members</p>
+        </a>
+    </div>
+</div>

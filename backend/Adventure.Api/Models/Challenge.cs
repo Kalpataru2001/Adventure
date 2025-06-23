@@ -11,5 +11,7 @@ namespace Adventure.Api.Models
         public string? Category { get; set; }
         public int? Difficulty { get; set; }
         public DateTime CreatedAt { get; set; }
+        public decimal? Latitude { get; set; }
+        public decimal? Longitude { get; set; }
     }
 }

@@ -36,10 +36,10 @@ export class BookingsComponent implements OnInit {
     const { value: formValues } = await Swal.fire({
       title: `Complete: ${challenge.title}`,
       html: `
-        <p class="text-sm text-gray-500 mb-4">${challenge.description}</p>
-        <textarea id="swal-post-text" class="swal2-textarea" placeholder="Share your experience... (optional)"></textarea>
-        <input id="swal-post-file" type="file" class="swal2-file" accept="image/*,video/*">
-      `,
+      <p class="text-sm text-gray-500 mb-4">${challenge.description}</p>
+      <textarea id="swal-post-text" class="swal2-textarea" placeholder="Share your experience... (optional)"></textarea>
+      <input id="swal-post-file" type="file" class="swal2-file" accept="image/*,video/*">
+    `,
       focusConfirm: false,
       preConfirm: () => {
         const file = (document.getElementById('swal-post-file') as HTMLInputElement).files?.[0];
@@ -56,10 +56,12 @@ export class BookingsComponent implements OnInit {
     });
 
     if (formValues && formValues.file) {
+      // Call the original method to complete the challenge
       this.bookingService.completeChallenge(challenge.completionId, formValues.text || null, formValues.file).subscribe({
         next: () => {
           this.notify.success('Adventure Completed!', 'Congratulations!');
-          // Navigate to the social feed to see the new post
+          this.bookingService.updateStreak().subscribe();
+          this.activeChallenges = this.activeChallenges.filter(c => c.completionId !== challenge.completionId);
           this.router.navigate(['/social']);
         },
         error: (err) => {

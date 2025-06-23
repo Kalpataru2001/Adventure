@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 export interface Notification {
   id: string;
@@ -15,7 +16,7 @@ export interface Notification {
   providedIn: 'root'
 })
 export class NotificationService {
-  private readonly apiUrl = 'https://localhost:44384/api/Notifications';
+  private readonly apiUrl = environment.apiUrl + '/Notifications';
 
   constructor(private toastr: ToastrService, private http: HttpClient) { }
 

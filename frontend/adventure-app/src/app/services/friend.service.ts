@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, map, Observable, of } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 export interface User { id: string; firstName: string; lastName: string; avatarUrl: string | null; }
 export interface FriendRequest { requesterId: string; firstName: string; lastName: string; avatarUrl: string | null; }
@@ -9,7 +10,7 @@ export interface FriendRequest { requesterId: string; firstName: string; lastNam
 
 @Injectable({ providedIn: 'root' })
 export class FriendService {
-  private readonly apiUrl = 'https://localhost:44384/api/Friends';
+  private readonly apiUrl = environment.apiUrl + '/Friends';
   constructor(private http: HttpClient) { }
 
   findNewFriends(): Observable<User[]> {

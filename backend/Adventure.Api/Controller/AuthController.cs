@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Google.Apis.Auth;
+using Microsoft.Extensions.Logging;
 // We won't even need 'using BCrypt.Net;' with this method.
 
 namespace Adventure.Api.Controller
@@ -19,13 +20,15 @@ namespace Adventure.Api.Controller
         private readonly ITokenService _tokenService;
         private readonly IConfiguration _config;
         private readonly IEmailService _emailService;
+        private readonly ILogger<AuthController> _logger;
 
-        public AuthController(AppDbContext context, ITokenService tokenService, IConfiguration config, IEmailService emailService)
+        public AuthController(AppDbContext context, ITokenService tokenService, IConfiguration config, IEmailService emailService, ILogger<AuthController> logger)
         {
             _context = context;
             _tokenService = tokenService;
             _config = config;
             _emailService = emailService;
+            _logger = logger;
         }
 
         // ... inside the AuthController class ...
@@ -129,6 +132,8 @@ namespace Adventure.Api.Controller
             return Ok(new UserProfileResponse(user.Email, user.FirstName, user.LastName));
         }
 
+        // Inside AuthController.cs
+
         [HttpPost("forgot-password")]
         public async Task<IActionResult> ForgotPassword(ForgotPasswordRequest request)
         {
@@ -138,19 +143,25 @@ namespace Adventure.Api.Controller
                 return Ok(new { message = "If an account with this email exists, a password reset code has been sent." });
             }
 
-            // Generate a 6-digit OTP
             var otp = new Random().Next(100000, 999999).ToString();
-
-            // IMPORTANT: Store a HASH of the OTP, not the plain text OTP.
-            // This is for security. We'll use the same BCrypt library.
             user.PasswordResetToken = BCrypt.Net.BCrypt.HashPassword(otp);
-            user.ResetTokenExpires = DateTime.UtcNow.AddMinutes(10); // OTP is valid for 10 minutes
+            user.ResetTokenExpires = DateTime.UtcNow.AddMinutes(10);
 
             await _context.SaveChangesAsync();
-            await _emailService.SendPasswordResetOtpAsync(user.Email, otp); // Send the PLAIN OTP via email
-
+            var emailTask = Task.Run(async () =>
+            {
+                try
+                {
+                    await _emailService.SendPasswordResetOtpAsync(user.Email, otp);
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "BACKGROUND_EMAIL_FAILURE: Failed to send OTP email to {Email}", user.Email);
+                }
+            });
             return Ok(new { message = "If an account with this email exists, a password reset code has been sent." });
         }
+
         [HttpPost("verify-otp")]
         public async Task<IActionResult> VerifyOtp(VerifyOtpRequest request)
         {

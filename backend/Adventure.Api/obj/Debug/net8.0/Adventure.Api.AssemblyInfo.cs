@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Adventure.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f093d05c0f9edbb53317347d4204b2621aef15a6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+72c2c65b010319a079a9d1707918588e814cbd2a")]
 [assembly: System.Reflection.AssemblyProductAttribute("Adventure.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Adventure.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

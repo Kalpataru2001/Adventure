@@ -1,8 +1,7 @@
-// src/app/services/auth.service.ts
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
-import { map, catchError, tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { User, LoginRequest, RegisterRequest, AuthResponse } from '../models/user.model';
 import { NotificationService } from './notification.service';
@@ -16,7 +15,7 @@ declare const google: any;
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly API_URL = 'https://localhost:44384/api/Auth';
+  private readonly API_URL = environment.apiUrl + '/Auth';
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   public currentUser$ = this.currentUserSubject.asObservable();
 
@@ -24,147 +23,110 @@ export class AuthService {
     private http: HttpClient,
     private router: Router,
     private notify: NotificationService,
-     private notificationState: NotificationStateService,
-     private realtimeNotificationService: RealtimeNotificationService
-  ) {
-    // The call to restoreSession() is removed from here.
-  }
+    private notificationState: NotificationStateService,
+    private realtimeNotificationService: RealtimeNotificationService,
+    private zone: NgZone
+  ) { }
 
-  // ==================== NEW METHOD FOR APP_INITIALIZER ====================
   public initializeAuthState(): Observable<User | null> {
     const token = this.getToken();
     if (token && !this.isTokenExpired(token)) {
       return this.http.get<User>(`${this.API_URL}/me`).pipe(
         tap(user => {
           this.currentUserSubject.next(user);
-           this.notificationState.fetchFriendRequestCount();
+          this.startRealtimeServices();
         }),
         catchError(() => {
-          this.clearSession();
+          this.logout();
           return of(null);
         })
       );
     } else {
-      this.clearSession();
+      this.clearLocalSession();
       return of(null);
     }
   }
-  // =======================================================================
 
 
-  // --- All your other methods remain the same ---
-
-  register(data: RegisterRequest): Observable<void> {
+  register(data: RegisterRequest): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.API_URL}/register`, data).pipe(
-      tap(resp => this.saveSession(resp)),
-      map(() => {
-        this.notify.success('Account created successfully! Welcome aboard!', 'Registration Successful');
-      }),
-      catchError(err => {
-        const msg = err.error?.message || 'Registration failed. Please try again.';
-        this.notify.error(msg, 'Registration Error');
-        return throwError(() => err);
+      tap(resp => {
+        this.saveSession(resp);
+        this.notify.success('Account created successfully!', 'Welcome');
       })
     );
   }
 
-  login(data: LoginRequest): Observable<void> {
+  login(data: LoginRequest): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.API_URL}/login`, data).pipe(
-      tap(resp => this.saveSession(resp)),
-      map(() => {
+      tap(resp => {
+        this.saveSession(resp); // Handle session and start services here
         this.notify.success('Welcome back!', 'Login Successful');
-        this.realtimeNotificationService.startConnection();
       }),
       catchError(err => {
-        const msg = err.error?.message || 'Login failed. Please check your credentials.';
-        this.notify.error(msg, 'Login Error');
+        this.notify.error(err.error?.message || 'Login failed.', 'Error');
         return throwError(() => err);
       })
     );
   }
 
-  googleSignIn(): Promise<void> {
-    return new Promise((resolve, reject) => {
-      if (!google?.accounts?.id) { return reject(new Error('Google SDK not loaded.')); }
-      google.accounts.id.initialize({
-        client_id: environment.googleClientId,
-        callback: (res: any) => {
-          this.exchangeGoogleToken(res.credential).subscribe({
-            next: () => { this.notify.success('Successfully signed in with Google!', 'Welcome'); resolve(); },
-            error: err => reject(err)
-          });
-        }
-      });
-      google.accounts.id.prompt();
-    });
-  }
-
-  forgotPassword(email: string): Observable<any> {
-    return this.http.post(`${this.API_URL}/forgot-password`, { email });
-  }
-
-  verifyOtp(email: string, otp: string): Observable<any> {
-    return this.http.post(`${this.API_URL}/verify-otp`, { email, otp });
-  }
-  
-  resetPassword(email: string, otp: string, password: string): Observable<any> {
-    return this.http.post(`${this.API_URL}/reset-password`, { email, otp, password });
-  }
-
-  public exchangeGoogleToken(token: string): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${this.API_URL}/google-login`, { idToken: token }).pipe(
-      tap(resp => this.saveSession(resp)),
-      catchError(err => {
-        const msg = err.error?.message || 'Google authentication failed';
-        this.notify.error(msg, 'Authentication Error');
-        return throwError(() => err);
-      })
-    );
-  }
-
-  // --- Updated Session Management Methods ---
-
-  private clearSession() {
-    localStorage.removeItem('token');
-    // We no longer need to manage the 'user' item in local storage
-    this.currentUserSubject.next(null);
-  }
-
-  private saveSession(resp: AuthResponse) {
-    const { token, email, firstName, lastName } = resp;
-    localStorage.setItem('token', token);
-    const user: User = { email, firstName, lastName };
-    // The user state is now set directly in the BehaviorSubject
+  private saveSessionAndStartServices(resp: AuthResponse) {
+    localStorage.setItem('token', resp.token);
+    const user: User = { email: resp.email, firstName: resp.firstName, lastName: resp.lastName };
     this.currentUserSubject.next(user);
-     this.notificationState.fetchFriendRequestCount(); 
+    this.startRealtimeServices();
   }
 
-  logout() {
-    this.clearSession();
-    this.notify.info('You have been logged out.', 'Logged Out');
-    this.realtimeNotificationService.stopConnection();
-    this.router.navigate(['/auth/login']);
-  }
-
-  isAuthenticated(): boolean {
-    const token = localStorage.getItem('token');
-    return !!token && !this.isTokenExpired(token);
-  }
-
-  getToken(): string | null {
-    return localStorage.getItem('token');
-  }
-
-  private isTokenExpired(token: string): boolean {
-    try {
-      const payload = JSON.parse(atob(token.split('.')[1]));
-      return payload.exp * 1000 < Date.now();
-    } catch {
-      return true;
+  googleSignIn(): void {
+    if (typeof google !== 'undefined' && google.accounts?.id) {
+      google.accounts.id.prompt();
+    } else {
+      this.notify.error('Google Sign-In is not available. Please refresh.', 'Error');
     }
   }
 
-  // The old getCurrentUser() method is no longer needed for session restoration,
-  // but it can be kept if other parts of your app call it directly.
-  // The logic inside initializeAuthState is now the primary method.
+  // THIS METHOD IS PUBLIC and handles saving the session internally.
+  public exchangeGoogleToken(token: string): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(`${this.API_URL}/google-login`, { idToken: token }).pipe(
+      tap(resp => this.saveSession(resp)), // Handle session and start services here
+      catchError(err => {
+        this.notify.error(err.error?.message || 'Google authentication failed', 'Authentication Error');
+        return throwError(() => err);
+      })
+    );
+  }
+
+
+  private saveSession(resp: AuthResponse) {
+    localStorage.setItem('token', resp.token);
+    const user: User = { email: resp.email, firstName: resp.firstName, lastName: resp.lastName };
+    this.currentUserSubject.next(user);
+    this.startRealtimeServices();
+  }
+
+  private startRealtimeServices(): void {
+    console.log("AuthService: Starting real-time services..."); // For debugging
+    this.notificationState.fetchFriendRequestCount();
+    this.realtimeNotificationService.startConnection();
+  }
+
+  logout() {
+    this.realtimeNotificationService.stopConnection();
+    this.clearLocalSession();
+    this.notify.info('You have been logged out.', 'Logged Out');
+    this.router.navigate(['/auth/login']);
+  }
+
+  private clearLocalSession() {
+    localStorage.removeItem('token');
+    this.currentUserSubject.next(null);
+  }
+
+  // Other methods remain unchanged
+  forgotPassword(email: string): Observable<any> { return this.http.post(`${this.API_URL}/forgot-password`, { email }); }
+  verifyOtp(email: string, otp: string): Observable<any> { return this.http.post(`${this.API_URL}/verify-otp`, { email, otp }); }
+  resetPassword(email: string, otp: string, password: string): Observable<any> { return this.http.post(`${this.API_URL}/reset-password`, { email, otp, password }); }
+  getToken(): string | null { return localStorage.getItem('token'); }
+  isAuthenticated(): boolean { const token = this.getToken(); return !!token && !this.isTokenExpired(token); }
+  private isTokenExpired(token: string): boolean { try { const payload = JSON.parse(atob(token.split('.')[1])); return payload.exp * 1000 < Date.now(); } catch { return true; } }
 }

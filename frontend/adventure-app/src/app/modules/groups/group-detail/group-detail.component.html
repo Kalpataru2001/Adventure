@@ -1,0 +1,37 @@
+<div *ngIf="isLoading" class="text-center p-10">Loading group details...</div>
+
+<div *ngIf="!isLoading && group" class="max-w-4xl mx-auto p-6">
+  <div class="flex justify-between items-start mb-6">
+    <div>
+      <h1 class="text-4xl font-bold">{{ group.name }}</h1>
+      <p *ngIf="group.description" class="text-lg text-gray-600 mt-2">{{ group.description }}</p>
+    </div>
+    <button (click)="onAddMembers()" class="px-4 py-2 bg-green-500 text-white rounded-lg">
+      Add Members
+    </button>
+  </div>
+  
+  <!-- Member List -->
+  <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+    <h3 class="text-xl font-semibold mb-4">{{ group.members.length }} Members</h3>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+      <div *ngFor="let member of group.members" class="text-center">
+        <img [src]="member.avatarUrl || 'assets/default-avatar.png'" class="h-16 w-16 rounded-full mx-auto object-cover">
+        <p class="mt-2 text-sm font-medium">{{ member.firstName }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chat Section (Placeholder for now) -->
+  <div class="bg-white p-6 rounded-lg shadow-sm">
+    <h3 class="text-xl font-semibold mb-4">Group Chat</h3>
+    <div class="chat-window h-96 border rounded-lg p-4 mb-4 bg-gray-50 overflow-y-auto">
+      <!-- Chat messages will be rendered here later -->
+      <p class="text-gray-400 text-center">Chat functionality coming soon!</p>
+    </div>
+    <div class="flex gap-2">
+      <input type="text" placeholder="Type a message..." class="w-full border rounded-lg p-2">
+      <button class="px-4 py-2 bg-blue-500 text-white rounded-lg">Send</button>
+    </div>
+  </div>
+</div>

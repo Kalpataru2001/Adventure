@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Adventure.Api.Hubs;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.Logging;
 
 namespace Adventure.Api.Controller
 {
@@ -19,12 +20,14 @@ namespace Adventure.Api.Controller
         private readonly AppDbContext _context;
         private readonly IFileService _fileService; // We'll need this for uploads
         private readonly IHubContext<NotificationHub> _notificationHubContext;
+        private readonly ILogger<PostsController> _logger;
 
-        public PostsController(AppDbContext context, IFileService fileService, IHubContext<NotificationHub> notificationHubContext)
+        public PostsController(AppDbContext context, IFileService fileService, IHubContext<NotificationHub> notificationHubContext, ILogger<PostsController> logger)
         {
             _context = context;
             _fileService = fileService;
             _notificationHubContext = notificationHubContext;
+            _logger = logger;
         }
 
         // A DTO for how we want to return posts to the frontend
@@ -96,7 +99,7 @@ namespace Adventure.Api.Controller
                 await file.CopyToAsync(memoryStream);
                 memoryStream.Position = 0;
                 // Assuming you have a 'posts' bucket set up similarly to 'avatars'
-                var publicUrl = await _fileService.UploadFileAsync(memoryStream, fileExtension, userId, "posts");
+                var publicUrl = await _fileService.UploadFileAsync(memoryStream, fileExtension, userId, "avatars");
                 newPost.PhotoUrl = publicUrl;
                 if (file.ContentType.StartsWith("image/"))
                 {
@@ -125,28 +128,72 @@ namespace Adventure.Api.Controller
             return CreatedAtAction(nameof(GetPosts), new { id = newPost.Id }, newPost);
         }
 
-        // POST /api/posts/{postId}/like - Like or unlike a post
+
         [HttpPost("{postId}/like")]
         public async Task<IActionResult> LikePost(Guid postId)
         {
-            var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            var actorUserId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            var actorFirstName = User.FindFirstValue("given_name");
+            _logger.LogInformation("User {ActorId} ({ActorName}) is attempting to like post {PostId}", actorUserId, actorFirstName, postId);
 
             var existingLike = await _context.PostLikes
-                .FirstOrDefaultAsync(l => l.PostId == postId && l.UserId == userId);
+                .FirstOrDefaultAsync(l => l.PostId == postId && l.UserId == actorUserId);
 
             if (existingLike != null)
             {
-                // User has already liked, so unlike it
+                // Unlike logic
                 _context.PostLikes.Remove(existingLike);
+                _logger.LogInformation("User {ActorId} unliked post {PostId}", actorUserId, postId);
             }
             else
             {
-                // User has not liked yet, so add a like
-                var newLike = new PostLike { PostId = postId, UserId = userId };
+                // Like logic
+                var newLike = new PostLike { PostId = postId, UserId = actorUserId, CreatedAt = DateTime.UtcNow };
                 _context.PostLikes.Add(newLike);
+                _logger.LogInformation("User {ActorId} liked post {PostId}", actorUserId, postId);
+
+                // Notification logic with detailed logging
+                var post = await _context.Posts
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync(p => p.Id == postId);
+
+                if (post == null)
+                {
+                    _logger.LogWarning("Could not find post {PostId} to send notification for like.", postId);
+                }
+                else if (post.UserId == actorUserId)
+                {
+                    _logger.LogInformation("User liked their own post. No notification will be sent.");
+                }
+                else
+                {
+                    _logger.LogInformation("Post author is {AuthorId}. Creating notification in database.", post.UserId);
+                    var notification = new Notification
+                    {
+                        UserId = post.UserId,
+                        ActorUserId = actorUserId,
+                        Type = "post_like",
+                        EntityId = postId,
+                        Message = $"{actorFirstName} liked your post.",
+                        IsRead = false,
+                        CreatedAt = DateTime.UtcNow
+                    };
+                    _context.Notifications.Add(notification);
+
+                    // Real-time push logic with detailed logging
+                    var authorIdString = post.UserId.ToString();
+                    _logger.LogInformation("Attempting to send SignalR notification to user: {TargetUserId}", authorIdString);
+
+                    await _notificationHubContext.Clients.User(authorIdString)
+                        .SendAsync("ReceiveNotification", notification.Message);
+
+                    _logger.LogInformation("SignalR message for 'ReceiveNotification' has been successfully dispatched for user {TargetUserId}.", authorIdString);
+                }
             }
 
             await _context.SaveChangesAsync();
+            _logger.LogInformation("Database changes saved for post {PostId} like action.", postId);
+
             return Ok();
         }
 
@@ -183,7 +230,6 @@ namespace Adventure.Api.Controller
         // A DTO for the request body to add a comment
         public record AddCommentRequest(string CommentText);
 
-        // --- NEW ENDPOINT: Add a new comment to a post ---
         // POST /api/posts/{postId}/comments
         [HttpPost("{postId}/comments")]
         public async Task<IActionResult> AddComment(Guid postId, [FromBody] AddCommentRequest request)
@@ -266,7 +312,7 @@ namespace Adventure.Api.Controller
             // IMPORTANT: Authorization check
             if (post.UserId != userId)
             {
-                return Forbid(); 
+                return Forbid();
             }
 
             // Before deleting the post, we must also delete its file from Supabase Storage

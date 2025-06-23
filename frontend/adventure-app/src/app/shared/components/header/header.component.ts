@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import Swal from 'sweetalert2';
 import { NotificationStateService } from 'src/app/services/notification-state.service';
 import { Notification, NotificationService } from 'src/app/services/notification.service';
+import { RealtimeNotificationService } from 'src/app/services/realtime-notification.service'; // <-- Import this
 
 @Component({
   selector: 'app-header',
@@ -17,12 +18,14 @@ export class HeaderComponent {
 
   constructor(
     public authService: AuthService,
-    public notificationState: NotificationStateService,
-    private notificationService: NotificationService
-  ) {}
+    public notificationState: NotificationStateService, // For friend request badge
+    public realtimeNotificationService: RealtimeNotificationService, // <-- Inject this for the bell badge
+    private notificationService: NotificationService // For API calls
+  ) { }
 
   toggleMenu() { this.open = !this.open; }
   closeMenu() { this.open = false; }
+
   onLogout(): void {
     this.closeMenu();
     Swal.fire({
@@ -35,14 +38,13 @@ export class HeaderComponent {
     });
   }
 
-  // --- CORRECTED NOTIFICATION LOGIC ---
-
   toggleNotifications(event: Event): void {
     event.stopPropagation();
     this.isNotificationsOpen = !this.isNotificationsOpen;
-    
+
     if (this.isNotificationsOpen) {
       this.fetchNotifications();
+      // Mark notifications as read when the panel opens
       this.markNotificationsAsRead();
     }
   }
@@ -54,16 +56,13 @@ export class HeaderComponent {
       this.isLoadingNotifications = false;
     });
   }
-  
+
   markNotificationsAsRead(): void {
-    // Use the new getter for the current value
-    const unreadCount = this.notificationState.currentFriendRequestCount; 
-    
-    if (unreadCount > 0) {
-      // For now, we assume clicking the bell clears friend request notifications
-      this.notificationState.setFriendRequestCount(0);
-      
-      this.notificationService.markAllAsRead().subscribe(); 
+    // --- THIS IS THE FIX ---
+    // Use the new getter to access the current value.
+    if (this.realtimeNotificationService.currentUnreadCount > 0) {
+      this.realtimeNotificationService.markAsRead();
+      this.notificationService.markAllAsRead().subscribe();
     }
   }
 

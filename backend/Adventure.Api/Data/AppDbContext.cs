@@ -57,9 +57,17 @@ namespace Adventure.Api.Data
 
             modelBuilder.Entity<PostLike>()
                 .HasKey(pl => new { pl.PostId, pl.UserId }); // Composite key
+            modelBuilder.Entity<GroupMember>()
+                 .HasKey(gm => new { gm.GroupId, gm.UserId }); // Composite key
         }
         public DbSet<Comment> Comments { get; set; }
 
         public DbSet<Adventure.Api.Models.Notification> Notifications { get; set; }
+
+        public DbSet<Group> Groups { get; set; }
+        public DbSet<GroupMember> GroupMembers { get; set; }
+
+        // In AppDbContext.cs
+        public DbSet<GroupChat> GroupChats { get; set; }
     }
 }

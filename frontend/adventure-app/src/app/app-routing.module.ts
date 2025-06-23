@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './modules/auth/guards/auth.guard';
 
 const routes: Routes = [
- {
+  {
     path: 'auth',
     loadChildren: () =>
       import('./modules/auth/auth.module').then(m => m.AuthModule)
@@ -41,7 +41,16 @@ const routes: Routes = [
         path: 'friends',
         loadChildren: () =>
           import('./modules/friends/friends.module').then(m => m.FriendsModule)
-      }
+      },
+      {
+        path: 'dashboard',
+        loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule)
+      },
+      {
+        path: 'groups',
+        loadChildren: () => import('./modules/groups/groups.module').then(m => m.GroupsModule),
+        canActivate: [AuthGuard] // Protect this section
+      },
     ]
   },
 

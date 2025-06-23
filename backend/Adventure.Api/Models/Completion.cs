@@ -9,5 +9,6 @@
         public DateTime? CompletedAt { get; set; } // Nullable for now
         public string? PhotoUrl { get; set; }
         public string? VideoUrl { get; set; }
+        public Challenge Challenge { get; set; }
     }
 }

@@ -243,6 +243,26 @@
     ]
   },
   {
+    "ContainingType": "Adventure.Api.Controller.DashboardController",
+    "Method": "GetMapData",
+    "RelativePath": "api/Dashboard/map-data",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Adventure.Api.Models.MapPinDto, Adventure.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "Adventure.Api.Controller.FriendsController",
     "Method": "RemoveFriend",
     "RelativePath": "api/Friends/{friendId}",
@@ -345,6 +365,115 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "Adventure.Api.Controller.GroupsController",
+    "Method": "CreateGroup",
+    "RelativePath": "api/Groups",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Adventure.Api.Controller.GroupsController\u002BCreateGroupRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Adventure.Api.Controller.GroupsController",
+    "Method": "GetMyGroups",
+    "RelativePath": "api/Groups",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Adventure.Api.Controller.GroupsController\u002BGroupListItemDto, Adventure.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Adventure.Api.Controller.GroupsController",
+    "Method": "GetGroupDetails",
+    "RelativePath": "api/Groups/{groupId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "groupId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Adventure.Api.Controller.GroupsController\u002BGroupDetailDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Adventure.Api.Controller.GroupsController",
+    "Method": "GetAddableFriends",
+    "RelativePath": "api/Groups/{groupId}/addable-friends",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "groupId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Adventure.Api.Controller.GroupsController\u002BAddableFriendDto, Adventure.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Adventure.Api.Controller.GroupsController",
+    "Method": "AddMember",
+    "RelativePath": "api/Groups/{groupId}/members",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "groupId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "Adventure.Api.Controller.GroupsController\u002BAddMemberRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "Adventure.Api.Controller.NotificationsController",
@@ -629,6 +758,16 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "Adventure.Api.Controller.StreaksController",
+    "Method": "UpdateStreak",
+    "RelativePath": "api/Streaks/update",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "Adventure.Api.Controllers.TestController",

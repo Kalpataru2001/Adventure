@@ -113,4 +113,41 @@
         public DateTime CreatedAt { get; set; }
     }
 
+    public class MapPinDto
+    {
+        public string Title { get; set; }
+        public decimal Latitude { get; set; }
+        public decimal Longitude { get; set; }
+    }
+
+    public class Group
+    {
+        public Guid Id { get; set; }
+        public string Name { get; set; }
+        public string? Description { get; set; }
+        public Guid CreatorId { get; set; }
+        public DateTime CreatedAt { get; set; }
+
+        // Navigation property for joins
+        public ICollection<GroupMember> GroupMembers { get; set; }
+    }
+    public class GroupMember
+    {
+        public Guid GroupId { get; set; }
+        public Guid UserId { get; set; }
+
+        // Navigation properties
+        public Group Group { get; set; }
+        public User User { get; set; }
+    }
+    public class GroupChat
+    {
+        public Guid Id { get; set; }
+        public Guid GroupId { get; set; }
+        public Guid UserId { get; set; }
+        public string? MessageText { get; set; }
+        public string? MediaUrl { get; set; }
+        public DateTime CreatedAt { get; set; }
+    }
+
 }

@@ -1,9 +1,9 @@
 <nav class="bg-white shadow-md sticky top-0 z-50">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-16">
-      
+
       <!-- Logo -->
-      <a routerLink="/" class="text-xl font-bold text-blue-600">
+      <a routerLink="/" (click)="closeMenu()" class="text-xl font-bold text-blue-600">
         Adventure App
       </a>
 
@@ -11,22 +11,67 @@
       <div class="hidden lg:flex items-center gap-4">
         <a routerLink="/" class="nav-link">Home</a>
         <a routerLink="/social" class="nav-link">Social</a>
+        <a routerLink="/dashboard" class="nav-link">Dashboard</a>
         <a routerLink="/destinations" class="nav-link">Destinations</a>
         <a routerLink="/bookings" class="nav-link">Bookings</a>
-        
+
         <ng-container *ngIf="authService.currentUser$ | async; else showDesktopLogin">
           <!-- Logged-in desktop view -->
-          <div class="flex items-center gap-4 border-l pl-4">
+          <div class="flex items-center gap-4 border-l pl-4 ml-2">
             <a routerLink="/profile" class="nav-link">Profile</a>
+            <!-- Friend Requests Icon -->
             <a routerLink="/friends/requests" class="icon-button relative" title="Friend Requests">
-              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
-              <span *ngIf="(notificationState.friendRequestCount$ | async) as count" [class.hidden]="count === 0" class="notification-badge">{{ count > 9 ? '9+' : count }}</span>
+              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+              <span *ngIf="(notificationState.friendRequestCount$ | async) as count" [class.hidden]="count === 0"
+                class="notification-badge">{{ count > 9 ? '9+' : count }}</span>
             </a>
-            <button class="icon-button" title="Notifications">
-              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6 6 0 10-12 0v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
-            </button>
+
+            <!-- General Notifications Icon & Dropdown Container -->
+            <div class="relative" (document:click)="closeNotifications()">
+              <button (click)="toggleNotifications($event)" class="icon-button" title="Notifications">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6 6 0 10-12 0v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                </svg>
+                <span *ngIf="(realtimeNotificationService.unreadCount$ | async) as count" [class.hidden]="count === 0"
+                  class="notification-badge">{{ count > 9 ? '9+' : count }}</span>
+              </button>
+              <!-- The Notification Dropdown Panel -->
+              <div *ngIf="isNotificationsOpen" (click)="$event.stopPropagation()"
+                class="absolute right-0 mt-2 w-80 sm:w-96 bg-white rounded-lg shadow-xl border z-50">
+                <div class="p-4 border-b">
+                  <h3 class="text-lg font-semibold text-gray-800">Notifications</h3>
+                </div>
+                <div *ngIf="isLoadingNotifications" class="p-4 text-center text-gray-500">Loading...</div>
+                <div *ngIf="!isLoadingNotifications" class="max-h-96 overflow-y-auto">
+                  <div *ngIf="notifications.length > 0; else noNotifications">
+                    <div *ngFor="let notification of notifications" class="notification-item"
+                      [class.unread]="!notification.isRead">
+                      <img [src]="notification.actorAvatarUrl || 'assets/default-avatar.png'" alt="actor avatar"
+                        class="h-10 w-10 rounded-full object-cover">
+                      <div class="flex-1">
+                        <p class="text-sm text-gray-800">{{ notification.message }}</p>
+                        <p class="text-xs text-blue-500">{{ notification.createdAt | amTimeAgo }}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <ng-template #noNotifications>
+                    <div class="p-8 text-center text-gray-500">
+                      <p>You have no notifications yet.</p>
+                    </div>
+                  </ng-template>
+                </div>
+              </div>
+            </div>
+
             <button (click)="onLogout()" class="icon-button text-red-500" title="Logout">
-              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
+              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+              </svg>
             </button>
           </div>
         </ng-container>
@@ -35,27 +80,32 @@
         </ng-template>
       </div>
 
-      <!-- Hamburger Button (Visible on mobile) -->
+      <!-- ================== START: HAMBURGER BUTTON (RESTORED) ================== -->
+      <!-- This button is only visible on mobile (lg:hidden) -->
       <div class="lg:hidden">
         <button (click)="toggleMenu()" class="p-2 rounded-md text-gray-600" aria-label="Toggle menu">
-          <svg *ngIf="!open" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
-          <svg *ngIf="open" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+          <svg *ngIf="!open" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <svg *ngIf="open" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
         </button>
       </div>
+      <!-- =================== END: HAMBURGER BUTTON (RESTORED) =================== -->
+
     </div>
   </div>
 
-  <!-- ==================== MOBILE MENU DROPDOWN ==================== -->
-  <!-- This section is only visible on mobile when the hamburger is clicked -->
+  <!-- MOBILE MENU DROPDOWN -->
   <div [ngClass]="{ 'block': open, 'hidden': !open }" class="lg:hidden border-t border-gray-200">
     <div class="px-2 pt-2 pb-3 space-y-1">
       <a routerLink="/" (click)="closeMenu()" class="mobile-nav-link">Home</a>
       <a routerLink="/social" (click)="closeMenu()" class="mobile-nav-link">Social</a>
+      <a routerLink="/dashboard" (click)="closeMenu()" class="mobile-nav-link">Dashboard</a>
       <a routerLink="/destinations" (click)="closeMenu()" class="mobile-nav-link">Destinations</a>
       <a routerLink="/bookings" (click)="closeMenu()" class="mobile-nav-link">Bookings</a>
-      
       <hr class="my-2">
-
       <ng-container *ngIf="authService.currentUser$ | async; else mobileLogin">
         <a routerLink="/profile" (click)="closeMenu()" class="mobile-nav-link">Profile</a>
         <a routerLink="/friends/requests" (click)="closeMenu()" class="mobile-nav-link">Friend Requests</a>
@@ -66,5 +116,4 @@
       </ng-template>
     </div>
   </div>
-  <!-- ============================================================= -->
 </nav>
