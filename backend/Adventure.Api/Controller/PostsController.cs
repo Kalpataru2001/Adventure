@@ -134,6 +134,14 @@ namespace Adventure.Api.Controller
         {
             var actorUserId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
             var actorFirstName = User.FindFirstValue("given_name");
+
+            // Add a fallback for the actor's name, just in case the claim is missing.
+            if (string.IsNullOrEmpty(actorFirstName))
+            {
+                var actor = await _context.Users.FindAsync(actorUserId);
+                actorFirstName = actor?.FirstName ?? "Someone";
+            }
+
             _logger.LogInformation("User {ActorId} ({ActorName}) is attempting to like post {PostId}", actorUserId, actorFirstName, postId);
 
             var existingLike = await _context.PostLikes
@@ -141,20 +149,19 @@ namespace Adventure.Api.Controller
 
             if (existingLike != null)
             {
-                // Unlike logic
+                // Unlike logic with logging
                 _context.PostLikes.Remove(existingLike);
                 _logger.LogInformation("User {ActorId} unliked post {PostId}", actorUserId, postId);
             }
             else
             {
-                // Like logic
+                // Like logic with logging
                 var newLike = new PostLike { PostId = postId, UserId = actorUserId, CreatedAt = DateTime.UtcNow };
                 _context.PostLikes.Add(newLike);
                 _logger.LogInformation("User {ActorId} liked post {PostId}", actorUserId, postId);
 
                 // Notification logic with detailed logging
                 var post = await _context.Posts
-                    .AsNoTracking()
                     .FirstOrDefaultAsync(p => p.Id == postId);
 
                 if (post == null)
@@ -168,13 +175,18 @@ namespace Adventure.Api.Controller
                 else
                 {
                     _logger.LogInformation("Post author is {AuthorId}. Creating notification in database.", post.UserId);
+
+                    // --- THIS IS THE NEW LOGIC INTEGRATED WITH THE OLD ---
+                    // Create the full, dynamic message string.
+                    var notificationMessage = $"{actorFirstName} liked your post.";
+
                     var notification = new Notification
                     {
                         UserId = post.UserId,
                         ActorUserId = actorUserId,
                         Type = "post_like",
                         EntityId = postId,
-                        Message = $"{actorFirstName} liked your post.",
+                        Message = notificationMessage, // <-- Use the full dynamic message
                         IsRead = false,
                         CreatedAt = DateTime.UtcNow
                     };
@@ -182,10 +194,11 @@ namespace Adventure.Api.Controller
 
                     // Real-time push logic with detailed logging
                     var authorIdString = post.UserId.ToString();
-                    _logger.LogInformation("Attempting to send SignalR notification to user: {TargetUserId}", authorIdString);
+                    _logger.LogInformation("Attempting to send SignalR notification to user: {TargetUserId} with message: '{Message}'", authorIdString, notificationMessage);
 
+                    // Send the full dynamic message via SignalR
                     await _notificationHubContext.Clients.User(authorIdString)
-                        .SendAsync("ReceiveNotification", notification.Message);
+                        .SendAsync("ReceiveNotification", notificationMessage);
 
                     _logger.LogInformation("SignalR message for 'ReceiveNotification' has been successfully dispatched for user {TargetUserId}.", authorIdString);
                 }
