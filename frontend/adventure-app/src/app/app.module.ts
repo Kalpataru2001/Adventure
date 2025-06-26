@@ -20,7 +20,7 @@ import { AuthInterceptor } from './modules/auth/interceptors/auth.interceptor';
 // --- 2. Import your AuthService ---
 import { AuthService } from './services/auth.service';
 
-// --- 3. Create the initializer factory function ---
+// -- 3. Create the initializer factory function --
 export function appInitializer(authService: AuthService) {
   return () => authService.initializeAuthState();
 }
