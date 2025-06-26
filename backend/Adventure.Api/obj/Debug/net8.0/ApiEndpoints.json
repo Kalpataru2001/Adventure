@@ -367,6 +367,27 @@
     ]
   },
   {
+    "ContainingType": "Adventure.Api.Controller.GroupChatsController",
+    "Method": "UploadChatMedia",
+    "RelativePath": "api/GroupChats/{groupId}/media",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "groupId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "file",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Adventure.Api.Controller.GroupsController",
     "Method": "CreateGroup",
     "RelativePath": "api/Groups",
@@ -470,6 +491,27 @@
       {
         "Name": "request",
         "Type": "Adventure.Api.Controller.GroupsController\u002BAddMemberRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Adventure.Api.Controller.GroupsController",
+    "Method": "AddMembers",
+    "RelativePath": "api/Groups/{groupId}/members/batch",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "groupId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "Adventure.Api.Controller.GroupsController\u002BAddMembersRequest",
         "IsRequired": true
       }
     ],

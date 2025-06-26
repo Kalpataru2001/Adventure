@@ -67,7 +67,5 @@ namespace Adventure.Api.Data
         public DbSet<Group> Groups { get; set; }
         public DbSet<GroupMember> GroupMembers { get; set; }
 
-        // In AppDbContext.cs
-        public DbSet<GroupChat> GroupChats { get; set; }
     }
 }
