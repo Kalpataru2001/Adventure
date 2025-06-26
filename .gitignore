@@ -1,0 +1,57 @@
+# Visual Studio / Rider
+.vs/
+.idea/
+
+# Build outputs
+**/bin/
+**/obj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.DotSettings.user
+
+# Rider caches, logs
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+
+
+# Debug files
+*.log
+*.pidb
+
+# NuGet packages
+*.nupkg
+/packages/
+/*.snupkg
+
+# Azure publish profiles
+PublishProfiles/
+
+# VS HTTP REPL / REST client requests
+*.http
+*.rest
+
+# Tool-generated files
+*.cache
+*.dbmdl
+*.dbproj.schemaview
+
+# Local app secrets & dev settings
+appsettings.Development.json
+secrets.json
+
+# OS‐generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Node stuff (if you pull in any front-end toolchains)
+node_modules/
+
+# Misc
+*.dotCover
+StyleCopReport.xml

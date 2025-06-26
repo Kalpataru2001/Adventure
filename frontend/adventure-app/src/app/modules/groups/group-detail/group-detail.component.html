@@ -12,26 +12,45 @@
   </div>
   
   <!-- Member List -->
+  <!-- Member List -->
   <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
     <h3 class="text-xl font-semibold mb-4">{{ group.members.length }} Members</h3>
-    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-      <div *ngFor="let member of group.members" class="text-center">
-        <img [src]="member.avatarUrl || 'assets/default-avatar.png'" class="h-16 w-16 rounded-full mx-auto object-cover">
-        <p class="mt-2 text-sm font-medium">{{ member.firstName }}</p>
+  
+    <!-- Use a responsive grid that looks good on all screen sizes -->
+    <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4">
+  
+      <!-- Loop over ONLY the visible members -->
+      <div *ngFor="let member of visibleMembers" class="text-center">
+        <img [src]="member.avatarUrl || 'assets/default-avatar.png'"
+          class="h-16 w-16 rounded-full mx-auto object-cover border-2 border-white shadow-sm">
+        <p class="mt-2 text-sm font-medium text-gray-700 truncate">{{ member.firstName }}</p>
       </div>
+  
+      <!-- The "+X more" button, shown only if there are hidden members -->
+      <button *ngIf="hiddenMemberCount > 0" (click)="showAllMembers()"
+        class="flex flex-col items-center justify-center text-center">
+        <div
+          class="h-16 w-16 rounded-full bg-gray-200 flex items-center justify-center border-2 border-dashed border-gray-400 text-gray-600 hover:bg-gray-300 hover:border-solid transition-colors">
+          <span class="font-bold text-lg">+{{ hiddenMemberCount }}</span>
+        </div>
+        <p class="mt-2 text-sm font-medium text-gray-700">More</p>
+      </button>
+  
     </div>
   </div>
 
-  <!-- Chat Section (Placeholder for now) -->
+  
+  <!-- Chat Section (Placeholder) -->
   <div class="bg-white p-6 rounded-lg shadow-sm">
     <h3 class="text-xl font-semibold mb-4">Group Chat</h3>
-    <div class="chat-window h-96 border rounded-lg p-4 mb-4 bg-gray-50 overflow-y-auto">
-      <!-- Chat messages will be rendered here later -->
+    <div class="chat-window h-96 border rounded-lg p-4 mb-4 bg-gray-50 flex items-center justify-center">
       <p class="text-gray-400 text-center">Chat functionality coming soon!</p>
     </div>
     <div class="flex gap-2">
-      <input type="text" placeholder="Type a message..." class="w-full border rounded-lg p-2">
-      <button class="px-4 py-2 bg-blue-500 text-white rounded-lg">Send</button>
+      <input type="text" placeholder="Type a message..." class="w-full border rounded-lg p-2" disabled>
+      <button class="px-6 py-2 bg-blue-500 text-white font-bold rounded-lg opacity-50 cursor-not-allowed">
+        Send
+      </button>
     </div>
   </div>
 </div>

@@ -109,6 +109,6 @@ app.UseAuthorization();
 
 // Map the controllers and hubs
 app.MapControllers();
-app.MapHub<NotificationHub>("/notificationHub"); // It's good practice to map hubs after auth middleware
+app.MapHub<NotificationHub>("/notificationHub");// It's good practice to map hubs after auth middleware
 
 app.Run();

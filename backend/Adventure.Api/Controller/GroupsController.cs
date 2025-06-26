@@ -15,6 +15,7 @@ namespace Adventure.Api.Controller
     {
         private readonly AppDbContext _context;
         public GroupsController(AppDbContext context) { _context = context; }
+        public record AddMembersRequest(List<Guid> UserIds);
 
         // DTO for creating a group
         public record CreateGroupRequest(string Name, string? Description);
@@ -160,6 +161,43 @@ namespace Adventure.Api.Controller
 
             return Ok(addableFriends);
         }
+        [HttpPost("{groupId}/members/batch")]
+public async Task<IActionResult> AddMembers(Guid groupId, [FromBody] AddMembersRequest request)
+{
+    var currentUserId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+    
+    // Authorization: Check if the current user is a member of the group
+    var isMember = await _context.GroupMembers.AnyAsync(gm => gm.GroupId == groupId && gm.UserId == currentUserId);
+    if (!isMember)
+    {
+        return Forbid("You are not a member of this group and cannot add others.");
+    }
+
+    // Get the list of users who are already in the group
+    var existingMemberIds = await _context.GroupMembers
+        .Where(gm => gm.GroupId == groupId)
+        .Select(gm => gm.UserId)
+        .ToListAsync();
+
+    // Filter out any user IDs that are already in the group
+    var newUserIds = request.UserIds.Except(existingMemberIds).ToList();
+
+    if (!newUserIds.Any())
+    {
+        return BadRequest("All selected users are already members of the group.");
+    }
+
+    var newMembers = newUserIds.Select(userId => new GroupMember
+    {
+        GroupId = groupId,
+        UserId = userId
+    }).ToList();
+
+    await _context.GroupMembers.AddRangeAsync(newMembers);
+    await _context.SaveChangesAsync();
+    
+    return Ok(new { message = $"{newMembers.Count} member(s) added successfully." });
+}
 
     }
 }

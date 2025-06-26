@@ -53,4 +53,8 @@ export class GroupService {
   getAddableFriends(groupId: string): Observable<AddableFriend[]> {
   return this.http.get<AddableFriend[]>(`${this.apiUrl}/${groupId}/addable-friends`);
 }
+addMembers(groupId: string, userIds: string[]): Observable<any> {
+  // The backend expects an object with a "userIds" property which is an array
+  return this.http.post(`${this.apiUrl}/${groupId}/members/batch`, { userIds });
+}
 }
