@@ -17,7 +17,6 @@
 .idea/**/tasks.xml
 .idea/**/usage.statistics.xml
 
-
 # Debug files
 *.log
 *.pidb
@@ -25,7 +24,7 @@
 # NuGet packages
 *.nupkg
 /packages/
-/*.snupkg
+*.snupkg
 
 # Azure publish profiles
 PublishProfiles/
@@ -39,7 +38,7 @@ PublishProfiles/
 *.dbmdl
 *.dbproj.schemaview
 
-# Local app secrets & dev settings
+# Local app secrets & dev settings - THIS IS THE MOST IMPORTANT PART FOR SECURITY
 appsettings.Development.json
 secrets.json
 
@@ -49,7 +48,7 @@ ehthumbs.db
 Desktop.ini
 $RECYCLE.BIN/
 
-# Node stuff (if you pull in any front-end toolchains)
+# Node stuff (if you have a frontend project in the same repo)
 node_modules/
 
 # Misc
