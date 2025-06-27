@@ -16,24 +16,23 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngularApp", policy =>
     {
+        // We will add the production frontend URL here later
         policy.WithOrigins("http://localhost:4200")
               .AllowAnyHeader()
               .AllowAnyMethod()
-              .AllowCredentials(); // Often needed for SignalR with auth
+              .AllowCredentials();
     });
 });
 
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
-    // This tells the serializer to handle object cycles by replacing them
-    // with a reference, preventing the infinite loop.
     options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
 });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddScoped<IBadgeService, BadgeService>();
 builder.Services.AddSwaggerGen(options =>
 {
-    // Your existing AddSecurityDefinition and AddSecurityRequirement are correct.
+    // Keeping your existing Swagger security definitions
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme { /* ... */ });
     options.AddSecurityRequirement(new OpenApiSecurityRequirement { /* ... */ });
 });
@@ -42,7 +41,6 @@ builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IEmailService, SendGridEmailService>();
 builder.Services.AddScoped<IFileService, SupabaseFileService>();
 
-// Add SignalR services
 builder.Services.AddSignalR();
 builder.Services.AddSingleton<IUserIdProvider, UserIdProvider>();
 
@@ -52,13 +50,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSnakeCaseNamingConvention();
 });
 
-// --- Configure Authentication with SignalR Support ---
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        // --- THIS IS THE CRITICAL ADDITION ---
-        // This event handler helps SignalR find the JWT token in the query string,
-        // as WebSockets cannot send standard Authorization headers.
         options.Events = new JwtBearerEvents
         {
             OnMessageReceived = context =>
@@ -74,7 +68,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 return Task.CompletedTask;
             }
         };
-        // ------------------------------------------
 
         options.TokenValidationParameters = new TokenValidationParameters
         {
@@ -94,21 +87,22 @@ AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 // --- APP & MIDDLEWARE ---
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+
+// =======================================================
+//  THE FIX IS HERE: Moved Swagger outside the 'if' block
+// =======================================================
+app.UseSwagger();
+app.UseSwaggerUI();
+// =======================================================
+
 app.UseCors("AllowAngularApp");
 
-// UseRouting must come before UseAuthorization
 app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
 
-// Map the controllers and hubs
 app.MapControllers();
-app.MapHub<NotificationHub>("/notificationHub");// It's good practice to map hubs after auth middleware
+app.MapHub<NotificationHub>("/notificationHub");
 
 app.Run();
