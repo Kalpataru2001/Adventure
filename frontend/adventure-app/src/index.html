@@ -9,45 +9,44 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <style>
+     <style>
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
     }
 
-    .app-loading-splash {
+    /* The main splash screen container */
+    #app-splash-screen {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: #111827; /* A dark background */
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #111827; /* Dark Gray-900 */
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      z-index: 1000;
-      transition: opacity 0.5s ease-out; /* For a smooth fade-out */
+      z-index: 99999; /* Ensure it's on top of everything */
+      opacity: 1;
+      transition: opacity 0.5s ease-in-out;
     }
 
-    /* Add a class to fade out and then hide the splash screen */
-    .app-loading-splash.fade-out {
+    /* Class to trigger the fade-out */
+    body.app-loaded #app-splash-screen {
       opacity: 0;
+      pointer-events: none; /* Make it unclickable during fade-out */
     }
 
-    .app-loading-splash .logo {
+    #app-splash-screen .logo {
       font-size: 2.5rem;
       font-weight: bold;
       color: white;
       margin-bottom: 1.5rem;
     }
     
-    /* Simple spinner animation */
-    .spinner {
+    #app-splash-screen .spinner {
       width: 50px;
       height: 50px;
-      border: 5px solid rgba(255, 255, 255, 0.3);
-      border-top-color: #34d399; /* An emerald green color */
+      border: 5px solid rgba(255, 255, 255, 0.2);
+      border-top-color: #10B981; /* Emerald-500 */
       border-radius: 50%;
       animation: spin 1s linear infinite;
     }
@@ -58,7 +57,12 @@
   </style>
 </head>
 <body class="mat-typography">
-  <app-root></app-root>
+  <app-root>
+     <div id="app-splash-screen">
+      <div class="logo">Adventure App</div>
+      <div class="spinner"></div>
+    </div>
+  </app-root>
 </body>
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 
