@@ -13,7 +13,10 @@
         <a routerLink="/social" class="nav-link">Social</a>
         <a routerLink="/dashboard" class="nav-link">Dashboard</a>
         <a routerLink="/destinations" class="nav-link">Destinations</a>
-        <a routerLink="/bookings" class="nav-link">Bookings</a>
+        <a routerLink="/bookings" class="nav-link relative">Bookings
+           <span *ngIf="(bookingState.newBookingsCount$ | async) as count" [class.hidden]="count === 0"
+        class="absolute top-1 right-0 h-2 w-2 bg-red-500 rounded-full"></span>
+        </a>
 
         <ng-container *ngIf="authService.currentUser$ | async; else showDesktopLogin">
           <!-- Logged-in desktop view -->
@@ -104,7 +107,10 @@
       <a routerLink="/social" (click)="closeMenu()" class="mobile-nav-link">Social</a>
       <a routerLink="/dashboard" (click)="closeMenu()" class="mobile-nav-link">Dashboard</a>
       <a routerLink="/destinations" (click)="closeMenu()" class="mobile-nav-link">Destinations</a>
-      <a routerLink="/bookings" (click)="closeMenu()" class="mobile-nav-link">Bookings</a>
+      <a routerLink="/bookings" (click)="closeMenu()" class="mobile-nav-link relative">Bookings
+         <span *ngIf="(bookingState.newBookingsCount$ | async) as count" [class.hidden]="count === 0"
+        class="absolute top-2 right-2 h-2 w-2 bg-red-500 rounded-full"></span>
+      </a>
       <hr class="my-2">
       <ng-container *ngIf="authService.currentUser$ | async; else mobileLogin">
         <a routerLink="/profile" (click)="closeMenu()" class="mobile-nav-link">Profile</a>

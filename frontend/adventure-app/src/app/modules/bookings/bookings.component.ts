@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActiveChallenge } from 'src/app/models/booking.model';
+import { BookingStateService } from 'src/app/services/booking-state.service';
 import { BookingService } from 'src/app/services/booking.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import Swal from 'sweetalert2';
@@ -17,11 +18,13 @@ export class BookingsComponent implements OnInit {
   constructor(
     private bookingService: BookingService,
     private notify: NotificationService,
-    private router: Router
+    private router: Router,
+    private bookingState: BookingStateService
   ) {}
 
   ngOnInit(): void {
     this.loadBookings();
+     this.bookingState.clearNewBookingsCount();
   }
 
   loadBookings(): void {

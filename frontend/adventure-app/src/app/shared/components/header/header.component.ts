@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import { NotificationStateService } from 'src/app/services/notification-state.service';
 import { Notification, NotificationService } from 'src/app/services/notification.service';
 import { RealtimeNotificationService } from 'src/app/services/realtime-notification.service'; // <-- Import this
+import { BookingStateService } from 'src/app/services/booking-state.service';
 
 @Component({
   selector: 'app-header',
@@ -20,7 +21,8 @@ export class HeaderComponent {
     public authService: AuthService,
     public notificationState: NotificationStateService, // For friend request badge
     public realtimeNotificationService: RealtimeNotificationService, // <-- Inject this for the bell badge
-    private notificationService: NotificationService // For API calls
+    private notificationService: NotificationService, // For API calls
+     public bookingState: BookingStateService,
   ) { }
 
   toggleMenu() { this.open = !this.open; }
