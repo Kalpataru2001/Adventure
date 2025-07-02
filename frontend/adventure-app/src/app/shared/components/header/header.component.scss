@@ -39,3 +39,13 @@
     @apply bg-blue-50;
   }
 }
+
+.bottom-nav-item {
+  @apply flex flex-col items-center justify-center text-gray-500 dark:text-gray-400 w-full h-full;
+  @apply transition-colors;
+
+  // This applies the active color when routerLinkActive is triggered
+  &.text-blue-600 {
+    @apply dark:text-blue-400;
+  }
+}
