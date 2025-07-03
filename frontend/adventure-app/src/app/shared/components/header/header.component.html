@@ -45,8 +45,38 @@
                     class="notification-badge">{{ count }}</span>
                 </button>
                 <div *ngIf="isNotificationsOpen" (click)="$event.stopPropagation()"
-                  class="absolute right-0 mt-2 w-80 ...">
-                  <!-- Notification dropdown panel -->
+                  class="absolute right-0 mt-2 w-80 sm:w-96 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 z-50">
+
+                  <div class="p-4 border-b dark:border-gray-700">
+                    <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100">Notifications</h3>
+                  </div>
+
+                  <!-- Loading State -->
+                  <div *ngIf="isLoadingNotifications" class="p-4 text-center text-gray-500 dark:text-gray-400">
+                    <p>Loading notifications...</p>
+                  </div>
+
+                  <div *ngIf="!isLoadingNotifications" class="max-h-96 overflow-y-auto">
+                    <!-- This block is shown if there are notifications -->
+                    <div *ngIf="notifications.length > 0; else noNotifications">
+                      <div *ngFor="let notification of notifications" class="notification-item"
+                        [class.unread]="!notification.isRead">
+                        <img [src]="notification.actorAvatarUrl || 'assets/default-avatar.png'" alt="actor avatar"
+                          class="h-10 w-10 rounded-full object-cover">
+                        <div class="flex-1">
+                          <p class="text-sm text-gray-800 dark:text-gray-200">{{ notification.message }}</p>
+                          <p class="text-xs text-blue-500 dark:text-blue-400">{{ notification.createdAt | amTimeAgo }}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- This block is shown if the notifications array is empty -->
+                    <ng-template #noNotifications>
+                      <div class="p-8 text-center text-gray-500 dark:text-gray-400">
+                        <p>You have no new notifications.</p>
+                      </div>
+                    </ng-template>
+                  </div>
                 </div>
               </div>
               <button (click)="onLogout()" class="icon-button text-red-500" title="Logout">
